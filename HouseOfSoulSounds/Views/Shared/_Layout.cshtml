@@ -1,0 +1,45 @@
+﻿<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    <title>HousOfSoulSound</title>
+    @await Html.PartialAsync("CssPartial")
+    <!-- favicons
+       ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body id="top">
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="page-wrapper">
+        @await Html.PartialAsync("HeaderPartial")
+        <div class="poz_content">
+            <div class="m" id="main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8 col-12-medium">
+                            @RenderBody()
+                            <div class="bottom" align="right">
+                                <br />
+                                <a title="назад" href="#" onclick="history.back(-1);"> &lt––</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @await Html.PartialAsync("ContentPartial")
+            @await Html.PartialAsync("ContentsPartial")
+        </div>
+        @await Html.PartialAsync("FooterPartial")
+    </div>
+    @await Html.PartialAsync("ScriptsPartial")
+</body>
+</html>

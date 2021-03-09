@@ -1,0 +1,44 @@
+﻿@model ChangeRoleModel
+@{
+    string strTitle = "Изменение  ролей";
+    ViewBag.Title = strTitle;
+}
+<div>
+    <h2>Изменение  прав доступа для "@Model.UserName"</h2>
+    <form asp-action="Edit" method="post">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="warning-text" asp-validation-summary="All"></div>
+        }
+        <input type="hidden" name="userId" value="@Model.Id" />Админ-права:
+        <div>
+            <input type="checkbox" name="roles" value=@RoleAdmin @(Model.UserRoles.Contains(RoleAdmin) ? "checked=\"checked\"" : "") />администратор
+            <br />
+            –––––––––––––––––––––
+            <br />
+            Чат*:
+            <br />
+            <input type="checkbox" id="@RoleModerator" onclick="onBox(@RoleModerator)" name="roles" value=@RoleModerator @(Model.UserRoles.Contains(RoleModerator) ? "checked=\"checked\"" : "") />модератор
+            <br />
+    
+        </div>
+        –––––––––––––––––––––
+        <p>*) Иерархия зависимостей прав доступа в чате: "участник" и "модератор" не могут быть не "гостем".</p>
+        <button type="submit">Изменить</button>
+    </form>
+</div>
+<script type="text/javascript">
+    function onBox(box) {
+        var box1 = document.getElementById("@RoleAdmin");
+        var box3 = document.getElementById("@RoleModerator");
+        switch (box) {
+            case @RoleAdmin:
+                if (!box1.checked) box2.checked = box3.checked = false;
+                break;
+         
+            case @RoleModerator:
+                if (box3.checked) box1.checked = true;
+                break;
+        }
+    }
+</script>

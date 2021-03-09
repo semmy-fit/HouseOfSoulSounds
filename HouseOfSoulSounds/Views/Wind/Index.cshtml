@@ -1,0 +1,335 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Wind Instruments Page";
+}
+<title>Wind_instruments</title>
+@Html.PartialAsync("HeaderPartial")
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+        *:before, *:after {
+            box-sizing: border-box;
+        }
+
+
+
+    .wrap {
+        width: 100%;
+        height: 100%;
+        background: gray;
+        padding: 15px 7.5px;
+        display: flex;
+    }
+
+        .wrap div[class^='block-'] {
+            width: calc(100% / 3);
+            min-height: 100px;
+            padding: 10px;
+            margin: 0 7.5px;
+            text-align: center;
+            background: white;
+        }
+
+            .wrap div[class^='block-'] img {
+                display: block;
+                height: auto;
+                max-width: 100%;
+                border: 1px solid gray;
+                box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            .wrap div[class^='block-'] p.price .price-count {
+                color: red;
+            }
+</style>
+<div class="s-extra">
+    <div class="wrap">
+        <br />
+        <br />
+        <div class="block-0">
+            <img src="~/images/wind_1.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-1">
+            <img src="~/images/wind_2.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-2">
+            <img src="~/images/wind_3.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-3">
+            <img src="~/images/wind_4.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <br />
+        <br />
+        <div class="block-0">
+            <img src="~/images/wind_5.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-1">
+            <img src="~/images/wind_6.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-2">
+            <img src="~/images/wind_7.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-3">
+            <img src="~/images/wind_8.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <br />
+        <br />
+        <div class="block-0">
+            <img src="~/images/wind_9.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-1">
+            <img src="~/images/wind_10.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-2">
+            <img src="~/images/wind_11.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-3">
+            <img src="~/images/wind_12.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <br />
+        <br />
+        <div class="block-0">
+            <img src="~/images/wind_13.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-1">
+            <img src="~/images/wind_14.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-2">
+            <img src="~/images/wind_15.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+        <div class="block-3">
+            <img src="~/images/wind_16.jpg" alt="ls-sample1" />
+            <h2 class="title">Title</h2>
+            <p class="sub-title">Sub-title</p>
+            <p class="price">Price <span class="price-count">3500</span> $</p>
+        </div>
+    </div>
+</div>
+@Html.PartialAsync("FooterPartial")
+@*<div class="wrapper">
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/piano.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">28</span><span class="month">Oct</span></div>
+                    <h3> Синтезатор</h3>
+                    <p>
+                        Как выбрать электронный клавишный инструмент?
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/gutar1.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">21</span><span class="month">Dec</span></div>
+                    <h3> Акустическая гитара</h3>
+                    <p>
+                        Как и какую гитару выбрать новичку
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/vio.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">06</span><span class="month">Mart</span></div>
+                    <h3>
+                        виолончель
+                    </h3>
+                    <p>
+                        Правильный выбор виолончели для обучения ребенку
+
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/grif-scripki.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">23</span><span class="month">Oct</span></div>
+                    <h3>Конструкция скрипки</h3>
+                    <p>
+                        Как выбрать скрипку?
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/d_i.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">18</span><span class="month">Oct</span></div>
+                    <h5>Духовые инструменты - виды и особенности</h5>
+                    <p>
+                        Статья об одном из самых разнообразных семейств музыкальных инструментов в мире
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/baraban.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">12</span><span class="month">Oct</span></div>
+                    <h3>Как выбрать барабанную установку</h3>
+                    <p>
+                        Различные конфигурации  барабанных установок.
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/fleita.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">11</span><span class="month">Dec</span></div>
+                    <h3> Выбираем первую флейту</h3>
+                    <p>
+                        несколько советов для удачной покупки
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/el_gutar.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">28</span><span class="month">Oct</span></div>
+                    <h3>Как выбрать правильную электрогитару</h3>
+                    <p>
+
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <div class="block">
+            <figure class="baha1493">
+                <div class="image"><img src="~/images/bass_gutar.jpg" alt="ls-sample1" /></div>
+                <figcaption>
+                    <div class="date"><span class="day">28</span><span class="month">Oct</span></div>
+                    <h3> Выбор басс-гитары</h3>
+                    <p>
+                        Как выбрать бас-гитару?
+                    </p>
+                    <footer>
+                        <div class="views"><i class="ion-eye"></i>2,907</div>
+                        <div class="love"><i class="ion-heart"></i>623</div>
+                        <div class="comments"><i class="ion-chatboxes"></i>23</div>
+                    </footer>
+                </figcaption>
+                <a href="#"></a>
+            </figure>
+        </div>
+        <br />
+        <br />
+    </div>*@
