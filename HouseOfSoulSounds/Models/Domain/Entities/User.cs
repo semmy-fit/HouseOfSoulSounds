@@ -13,7 +13,7 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         [Display(Name = "Аватар")]
         public string ImagePath { get; set; } = Config.DefaultAvatar;
         public bool? Blocked { get; set; } = false;
-
+       
 
 
 

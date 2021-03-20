@@ -14,6 +14,8 @@ namespace HouseOfSoulSounds.Models.Identity
         [EmailAddress(ErrorMessage = "Введите Email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Display(Name = "Аватарка")]
+        public string TitleImagePath { get; set; }
 
         public bool EmailConfirmed { get; set; }
     }

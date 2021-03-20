@@ -34,7 +34,7 @@ namespace HouseOfSoulSounds.Controllers
                         {
                             var roles = await userManager.GetRolesAsync(user);
                             if (roles?.Contains(Config.RoleAdmin) == true)
-                                returnUrl = "/Admin";
+                                returnUrl = "/PersonalArea";
                             else returnUrl = "/";
                         }
 

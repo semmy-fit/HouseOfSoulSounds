@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HouseOfSoulSounds.Models.Domain;
+using System.Threading.Tasks;
+using HouseOfSoulSounds.Models.Identity;
+using HouseOfSoulSounds.Models.Domain.Entities;
 
 namespace HouseOfSoulSounds.Areas.Admin.Controllers
 {
@@ -17,5 +20,6 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
         {
             return View(dataManager.Instruments.Items);
         }
+
     }
 }

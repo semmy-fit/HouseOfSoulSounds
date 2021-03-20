@@ -6,6 +6,7 @@ using HouseOfSoulSounds.Helpers;
 using HouseOfSoulSounds.Models;
 using Microsoft.AspNetCore.Identity;
 using HouseOfSoulSounds.Models.Domain.Entities;
+using EmailService = HouseOfSoulSounds.Helpers.EmailService;
 
 namespace HouseOfSoulSounds.Controllers
 {
@@ -92,9 +93,8 @@ namespace HouseOfSoulSounds.Controllers
             var code = await userManager.GeneratePasswordResetTokenAsync(user);
             var admin = await userManager.FindByNameAsync(Config.Admin);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code }, protocol: HttpContext.Request.Scheme);
-            EmailService emailService = new EmailService();
-            var res = await emailService.SendEmailAsync(
-                user.UserName, 
+            var res = await EmailService.SendEmailAsync(
+                user.UserName,
                 user.Email,
                 admin.Email,
                 "Смена пароля",

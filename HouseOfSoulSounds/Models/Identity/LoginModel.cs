@@ -15,5 +15,6 @@ namespace HouseOfSoulSounds.Models.Identity
 
         [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -15,6 +15,9 @@ using HouseOfSoulSounds.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using HouseOfSoulSounds.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using HouseOfSoulSounds.Models.Domain.Repositories.Abstract;
+using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
 
 namespace HouseOfSoulSounds
 {
@@ -30,6 +33,16 @@ namespace HouseOfSoulSounds
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.Bind("Project", new Config());
+            Config.WebRootPath = Path
+                .Combine(Configuration.GetValue<string>(WebHostDefaults.ContentRootKey), "wwwroot");
+
+            //подключаем нужный функционал приложения в качестве сервиса
+            //services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
+            //services.AddTransient<IInstrumentsItemsRepository, EFInstrumentsItemsRepository>();
+            //services.AddTransient<IMessageRepository, EFMessagesRepository>();
+            //services.AddTransient<DataManager>();
+
             string connection = Configuration.GetConnectionString("DefaultConnection");
           services.AddDbContext<EFAppDbContext>(options => options.UseSqlServer(connection));
             //настраиваем identity систему и сложность пароля
@@ -134,7 +147,14 @@ namespace HouseOfSoulSounds
                 endpoints.MapControllerRoute(
                     name: "default8",
                     pattern: "{controller=Wind}/{action=Index}/{id?}");
-            });
+
+               
+                endpoints.MapControllerRoute(
+                    name: "default10",
+                    pattern: "{controller=Home}/{action=Info}/{id?}");
+            
+        });
+
         }
     }
 }

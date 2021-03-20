@@ -10,6 +10,8 @@ using Microsoft.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
+using HouseOfSoulSounds.Models.Identity;
+
 
 namespace HouseOfSoulSounds.Models.Domain
 {
@@ -21,7 +23,7 @@ namespace HouseOfSoulSounds.Models.Domain
         public DbSet<InstrumentItem> InstrumentsItems { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }
-
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

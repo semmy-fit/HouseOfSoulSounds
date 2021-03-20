@@ -29,6 +29,21 @@
         <h2 class="header__nav-heading h6">Navigate to</h2>
 
         <ul class="header__nav">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a asp-area="" asp-controller="Account" asp-action="EditRegister" asp-route-returnUrl=@ViewData["ReturnUrl"]>
+                        <img src="~/images/user.ico" />
+                        @User.Identity.Name.ToLower()
+                    </a>
+                </li>
+                <li> <a asp-area="" asp-controller="Account" asp-action="Logout">выход</a></li>
+            }
+            else
+            {
+                <li><a asp-area="" asp-controller="Account" asp-action="Login">войти</a></li>
+                <li> <a asp-area="" asp-controller="Account" asp-action="Register">регистрация</a></li>
+            }
             <li class="current"><a href="index.html" title="">Home</a></li>
             <li class="has-children">
                 <a href="#0" title="">Categories</a>
@@ -50,11 +65,14 @@
                 </ul>
             </li>
             <li><a href="Account/Login" title="">Вход</a></li>
+            <li><a href="Account/Logout" title="">Выход</a></li>
             <li><a href="Account/Register" title="">Регистрация</a></li>
             <li><a href="page-about.html" title="">About</a></li>
             <li><a href="page-contact.html" title="">Contact</a></li>
             <li><a href="" title="">Instruments</a></li>
+
         </ul> <!-- end header__nav -->
+
 
         <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 

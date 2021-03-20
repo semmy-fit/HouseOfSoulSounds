@@ -3,8 +3,9 @@ using HouseOfSoulSounds.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using HouseOfSoulSounds.Models.Identity;
+
 using HouseOfSoulSounds.Models.Domain.Entities;
+
 
 namespace HouseOfSoulSounds.Controllers
 {
@@ -13,7 +14,6 @@ namespace HouseOfSoulSounds.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-
         public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr)
         {
             userManager = userMgr;

@@ -6,14 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using HouseOfSoulSounds.Models.Identity;
 using HouseOfSoulSounds.Models;
 using HouseOfSoulSounds.Models.Domain.Entities;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using HouseOfSoulSounds.Models.Domain;
+using System.Linq;
+using System.Net.Http.Headers;
+using System;
 
 namespace HouseOfSoulSounds.Controllers
 {
     [Authorize]
     public partial class AccountController
     {
+        EFAppDbContext _context;
+        IWebHostEnvironment _appEnvironment;
+
+        
+
         [AllowAnonymous]
-        public async Task<IActionResult> Register(string returnUrl)
+        public async Task<IActionResult> Register(string returnUrl = null)
         {
             if (User.Identity.IsAuthenticated)
                 return await EditRegister(returnUrl);
@@ -23,24 +36,46 @@ namespace HouseOfSoulSounds.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterModel model)
-        {
+        public async Task<IActionResult> Register(RegisterModel model, IFormFile titleImageFile)
+        { 
             if (ModelState.IsValid)
             {
-                User user = new User 
+                string imagePath = default;
+                if (titleImageFile is not null)
+                {
+                    //Assigning Unique Filename (Guid)
+                    var uniqueFileName = Convert.ToString(Guid.NewGuid());
+                    var FileExtension = Path.GetExtension(titleImageFile.FileName);
+                    imagePath = uniqueFileName + FileExtension;
+                }
+                User user = new User
                 {
                     Email = model.Email,
-                    UserName = model.UserName
+                    UserName = model.UserName,
+                    ImagePath = imagePath
                 };
+
+                
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {   
-                    await userManager.AddToRoleAsync(user, Config.RoleAdmin);
+                {
+                    if (!string.IsNullOrEmpty(titleImageFile?.FileName))
+                    {
+                        string path =Path.Combine(Config.AvatarsPath, imagePath );
+                        // сохраняем файл в папку Files в каталоге wwwroot
+                        using (var fileStream = new FileStream(Config.WebRootPath + path, FileMode.Create))
+                        {
+                            await titleImageFile.CopyToAsync(fileStream);
+                        }
+
+                    }
+
                     // установка куки
                     await signInManager.SignInAsync(user, false);
 
                     return await SendConfirmEmail(user);
                 }
+
 
                 foreach (var error in result.Errors)
                 {
@@ -85,6 +120,27 @@ namespace HouseOfSoulSounds.Controllers
             }
 
             return await SendConfirmEmail(user);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddFile(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                string path = "/Users/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(Path.Combine(Config.WebRootPath, path), FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                User file = new User {ImagePath = path };
+                _context.Users.Add(file);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Avatars/Index");
         }
     }
 }

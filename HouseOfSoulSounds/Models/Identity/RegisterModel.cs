@@ -1,20 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace HouseOfSoulSounds.Models.Identity
 {
     public class RegisterModel
-    {
+    {  
         [Required(ErrorMessage = "Введите логин")]
         [Display(Name = "Логин")]
         [MaxLength(40, ErrorMessage = "Слишком длинный логин (max = 40)"), 
             MinLength(4, ErrorMessage = "Слишком короткий логин (min = 4)")]
         public string UserName { get; set; }
-        public string ImagePath { get; set; }
         [Required(ErrorMessage = "Введите Email")]
         [EmailAddress(ErrorMessage = "Введите Email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
+        public string ImagePath { get; set; }//путь к файлу(аватару)
+   
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Слишком короткий пароль (min = 6)")]

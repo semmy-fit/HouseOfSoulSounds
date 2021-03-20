@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using HouseOfSoulSounds.Helpers;
 using HouseOfSoulSounds.Models;
-using Microsoft.AspNetCore.Identity;
 using HouseOfSoulSounds.Models.Domain.Entities;
 
 namespace HouseOfSoulSounds.Controllers
@@ -70,14 +69,22 @@ namespace HouseOfSoulSounds.Controllers
                 "Account",
                 new { userId = user.Id, code },
                 protocol: HttpContext.Request.Scheme);
-            EmailService emailService = new EmailService();
+         
             var admin = await userManager.FindByNameAsync(Config.Admin);
-            var res = await emailService.SendEmailAsync(
-                user.UserName, 
+            string res = string.Empty;
+            try
+            {
+                res = await EmailService.SendEmailAsync(
+                user.UserName,
                 user.Email,
                 admin.Email,
                 "Подтвердите Ваш Email",
                 $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+            }
+            catch(Exception e)
+            {
+                res = e.Message;
+            }
             string text = string.IsNullOrEmpty(res)
                 ? "Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме. Вам доступен чат, но возможность оставлять сообщения появятся только после подтверждения."
                 : $"Возникли трудности: {res}. Повторите попытку позже. Вам доступен чат, но возможность оставлять сообщения появятся только после подтверждения.";

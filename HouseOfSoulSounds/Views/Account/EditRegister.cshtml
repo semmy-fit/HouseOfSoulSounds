@@ -18,6 +18,15 @@
                 <input asp-for="UserName" />
                 <span class="warning-text" asp-validation-for="UserName"></span>
             </div>
+            <div class="div-box">
+               
+                <input type="file" name="titleImageFile" id="titleImageFile" />
+                @if (!string.IsNullOrWhiteSpace(Model.TitleImagePath))
+                {
+            <div>
+                <img class="img-block" src="~/images/avatars/@Model.TitleImagePath" />
+            </div>}
+            </div>
             <div>
                 <label asp-for="Email"></label>
                 <input asp-for="Email" />
