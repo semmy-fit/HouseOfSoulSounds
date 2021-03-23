@@ -48,11 +48,10 @@ namespace HouseOfSoulSounds.Controllers
                     var FileExtension = Path.GetExtension(titleImageFile.FileName);
                     imagePath = uniqueFileName + FileExtension;
                 }
-                User user = new User
+                User user = new()
                 {
                     Email = model.Email,
-                    UserName = model.UserName,
-                    ImagePath = imagePath
+                    UserName = model.UserName
                 };
 
                 
@@ -61,13 +60,21 @@ namespace HouseOfSoulSounds.Controllers
                 {
                     if (!string.IsNullOrEmpty(titleImageFile?.FileName))
                     {
-                        string path =Path.Combine(Config.AvatarsPath, imagePath );
-                        // сохраняем файл в папку Files в каталоге wwwroot
-                        using (var fileStream = new FileStream(Config.WebRootPath + path, FileMode.Create))
+                        user = await userManager.FindByNameAsync(model.UserName);
+                        if (user is not null)
                         {
-                            await titleImageFile.CopyToAsync(fileStream);
+                            user.ImagePath = imagePath;
+                            result = await userManager.UpdateAsync(user);
+                            if (result.Succeeded)
+                            {
+                                string path = Path.Combine(Config.AvatarsPath, imagePath);
+                                // сохраняем файл в папку Files в каталоге wwwroot
+                                using (var fileStream = new FileStream(Config.WebRootPath + path, FileMode.Create))
+                                {
+                                    await titleImageFile.CopyToAsync(fileStream);
+                                }
+                            }
                         }
-
                     }
 
                     // установка куки

@@ -6,10 +6,10 @@
     <h2>Личные данные пользователя</h2>
     <div class="div-box">
         <form asp-controller="Account" asp-action="EditRegister" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
-            @if(!ViewData.ModelState.IsValid)
+            <input type="hidden" asp-for="ImagePath" />
+            @if (!ViewData.ModelState.IsValid)
             {
-                <div class="warning-text" asp-validation-summary="All"></div>
-            }
+        <div class="warning-text" asp-validation-summary="All"></div>}
             <div>
                 <input asp-for="EmailConfirmed" type="hidden" />
             </div>
@@ -19,14 +19,20 @@
                 <span class="warning-text" asp-validation-for="UserName"></span>
             </div>
             <div class="div-box">
-               
-                <input type="file" name="titleImageFile" id="titleImageFile" />
-                @if (!string.IsNullOrWhiteSpace(Model.TitleImagePath))
+
+                @if (!string.IsNullOrWhiteSpace(Model.ImagePath))
                 {
             <div>
-                <img class="img-block" src="~/images/avatars/@Model.TitleImagePath" />
-            </div>}
+                <img class="img-block" src="~/images/avatars/@Model.ImagePath" />
+            </div>            }
+                <input type="file" name="titleImageFile" id="ImagePath" />
             </div>
+
+            @*@foreach (var image in (IEnumerable<string>)images)
+         {
+        //Your logic here eg:
+          <img class="img" src="@Url.Content(image)" />
+          }*@
             <div>
                 <label asp-for="Email"></label>
                 <input asp-for="Email" />
@@ -34,10 +40,9 @@
             </div>
             @if (!Model.EmailConfirmed)
             {
-                <div>
-                    <a asp-area="" asp-controller="Account" asp-action="RegisterEmailConfirm">Подтвердите Ваш email!</a>
-                </div>
-            }
+        <div>
+            <a asp-area="" asp-controller="Account" asp-action="RegisterEmailConfirm">Подтвердите Ваш email!</a>
+        </div>}
             <div>
                 <br />
                 <input type="submit" value="Изменить" />

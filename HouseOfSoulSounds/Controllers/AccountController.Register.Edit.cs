@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HouseOfSoulSounds.Models.Identity;
 using HouseOfSoulSounds.Models;
+using System.IO;
+using System.Linq;
 
 namespace HouseOfSoulSounds.Controllers
 {
@@ -31,7 +33,8 @@ namespace HouseOfSoulSounds.Controllers
             {
                 UserName = user.UserName,
                 Email = user.Email,
-                EmailConfirmed = user.EmailConfirmed
+                EmailConfirmed = user.EmailConfirmed,
+                ImagePath = user.ImagePath 
             });
         }
 
@@ -42,6 +45,9 @@ namespace HouseOfSoulSounds.Controllers
                 return await Register(ViewBag.returnUrl ?? "/");
 
             var user = await userManager.GetUserAsync(User);
+            //var images = Directory.EnumerateFiles(model.TitleImagePath)
+            //                .Select(fn => "ImagePath" + Path.GetFileName(fn));
+
             if (user is null)
             {
                 await signInManager.SignOutAsync();
@@ -82,6 +88,7 @@ namespace HouseOfSoulSounds.Controllers
 
                     if (result.Succeeded)
                     {
+
                         if (todoName)
                             await signInManager.SignInAsync(user, false);
                         if (todoEmail && !user.EmailConfirmed)

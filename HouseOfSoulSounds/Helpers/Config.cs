@@ -4,7 +4,7 @@
     {
         //НУЖНО ПРОДУМАТЬ БЕЗОПАСНОСТЬ!!!!!
         public const string EmailPass = "34semyon344";
-        public const string Email = "semyon.ganin555@gmail.com";
+        public const string Email = "houseofsoulsounds@gmail.com";
 
         public static readonly string
             Admin = "admin",
