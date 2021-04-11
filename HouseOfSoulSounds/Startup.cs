@@ -38,11 +38,13 @@ namespace HouseOfSoulSounds
                 .Combine(Configuration.GetValue<string>(WebHostDefaults.ContentRootKey), "wwwroot");
 
             //подключаем нужный функционал приложения в качестве сервиса
-            //services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
-            //services.AddTransient<IInstrumentsItemsRepository, EFInstrumentsItemsRepository>();
-            //services.AddTransient<IMessageRepository, EFMessagesRepository>();
-            //services.AddTransient<DataManager>();
+            services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
+            services.AddTransient<IInstrumentsItemsRepository, EFInstrumentsItemsRepository>();
+            services.AddTransient<IMessageRepository, EFMessagesRepository>();
+            services.AddTransient<ICatalogsRepository, EFCatalogsRepository>();
+            services.AddTransient<DataManager>();
 
+      
             string connection = Configuration.GetConnectionString("DefaultConnection");
           services.AddDbContext<EFAppDbContext>(options => options.UseSqlServer(connection));
             //настраиваем identity систему и сложность пароля
@@ -75,6 +77,7 @@ namespace HouseOfSoulSounds
             });
 
             //добавляем сервисы для контроллеров и представлений (MVC)
+
             services.AddControllersWithViews(x =>
             {
                 x.Conventions.Add(new AreasAuthorization("Admin", "AdminArea"));
@@ -109,51 +112,61 @@ namespace HouseOfSoulSounds
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+          
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(Config.Admin,
+                    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+           
             });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default2",
-                    pattern: "{controller=Instruments}/{action=Instruments}/{id?}");
-            });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default2",
-                    pattern: "{controller=Instruments}/{action=Instruments}/{gutar?}");
-            });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default4",
-                    pattern: "{controller=Carts}/{action=Carts}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "default5",
-                    pattern: "{controller=Barabans}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "default7",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default2",
+            //        pattern: "{controller=Instruments}/{action=Instruments}/{id?}");
+            //});
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default2",
+            //        pattern: "{controller=Instruments}/{action=Instruments}/{gutar?}");
+            //});
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default4",
+            //        pattern: "{controller=Carts}/{action=Carts}/{id?}");
+            //    endpoints.MapControllerRoute(
+            //        name: "default5",
+            //        pattern: "{controller=Barabans}/{action=Index}/{id?}");
+            //    endpoints.MapControllerRoute(
+            //        name: "default7",
+            //        pattern: "{controller=Account}/{action=Login}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "default6",
-                    pattern: "{controller=Account}/{action=Register}/{id?}");
+            //    endpoints.MapControllerRoute(
+            //        name: "default6",
+            //        pattern: "{controller=Account}/{action=Register}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "default8",
-                    pattern: "{controller=Wind}/{action=Index}/{id?}");
+            //    endpoints.MapControllerRoute(
+            //        name: "default8",
+            //        pattern: "{controller=Wind}/{action=Index}/{id?}");
 
-               
-                endpoints.MapControllerRoute(
-                    name: "default10",
-                    pattern: "{controller=Home}/{action=Info}/{id?}");
-            
-        });
+
+            //    endpoints.MapControllerRoute(
+            //        name: "default10",
+            //        pattern: "{controller=Home}/{action=Info}/{id?}");
+
+
+            //    endpoints.MapControllerRoute(Config.Admin,
+            //        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            //    endpoints.MapControllerRoute(
+            //      name: "Myroot",
+            //      pattern: "{controller=CatalogsItems}/{action=Edit}/{id?}");
+        //});
 
         }
     }

@@ -5,7 +5,7 @@
 <div>
     <h2>Личные данные пользователя</h2>
     <div class="div-box">
-        <form asp-controller="Account" asp-action="EditRegister" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
+        <form asp-controller="Account" asp-action="EditRegister" method="post" asp-route-returnUrl="@ViewBag.returnUrl" enctype="multipart/form-data">
             <input type="hidden" asp-for="ImagePath" />
             @if (!ViewData.ModelState.IsValid)
             {

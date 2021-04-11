@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseOfSoulSounds.Models.Domain.Entities
 {
-    public  class Message : ValueObject
+    public  class Message 
     {
         public Message() => DateAdded = DateTime.UtcNow.Date;
         [Required]
@@ -25,9 +25,6 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         [Display(Name = "Дата и время")]
         public DateTime DateAdded { get; set; }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Id;
-        }
+        
     }
 }

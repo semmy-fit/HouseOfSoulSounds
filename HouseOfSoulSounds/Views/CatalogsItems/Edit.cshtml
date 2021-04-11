@@ -1,0 +1,74 @@
+﻿@model  Catalog
+@{
+    string strTitle = Model.Id == default 
+        ? "Добавить новый" 
+        : "Редактировать событие";
+    ViewBag.Title = strTitle;
+}
+<style>
+    .treeline .drop {
+        position: absolute;
+        left: -6px;
+        top: 5px;
+        width: 11px;
+        height: 11px;
+        line-height: 1em;
+        text-align: center;
+        background: #9F9F9F;
+        color: #fff; /* Фон и цвет кнопки, раскрывающей список */
+        font-size: 78%; /* Размер +/- */
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+    }
+
+    .treeline li:last-child > .drop {
+        margin-left: 1px;
+    }
+
+    .treeline .drop + ul {
+        display: none;
+    }
+
+    .treeline .dropM + ul {
+        display: block;
+    }
+    </style>
+<script type="text/javascript">
+    $(function () {
+        var ul = document.querySelectorAll('.treeline > li:not(:only-child) ul, .treeline ul ul');
+        for (var i = 0; i < ul.length; i++) {
+            var div = document.createElement('div');
+            div.className = 'drop';
+            div.innerHTML = '+';
+            ul[i].parentNode.insertBefore(div, ul[i].previousSibling);
+            div.onclick = function () {
+                this.innerHTML = (this.innerHTML == '+' ? '−' : '+');
+                this.className = (this.className == 'drop' ? 'drop dropM' : 'drop');
+            }
+        }
+    })();
+    </script>
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <ul class="treeline">
+            <li>
+                Главное меню
+                <ul>
+                    <li>
+                        <div class="drop">+</div>База знаний /* Блок раскрытия списка */
+                        <ul>
+                            <li>model.Title</li>
+                            <li>Плагины</li>
+                            <li>Модули</li>
+                        </ul>
+                    </li>
+                    <li>Отзывы</li>
+                    <li>Контакты</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+

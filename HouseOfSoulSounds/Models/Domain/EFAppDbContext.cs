@@ -20,7 +20,7 @@ namespace HouseOfSoulSounds.Models.Domain
         public EFAppDbContext(DbContextOptions<EFAppDbContext> options) : base(options) { }
 
         public DbSet<TextField> TextFields { get; set; }
-        public DbSet<InstrumentItem> InstrumentsItems { get; set; }
+        public DbSet<InstrumentItem> InstrumentItems { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<User> Users { get; set; }
@@ -51,7 +51,7 @@ namespace HouseOfSoulSounds.Models.Domain
                 Email = "admin@email.com",
                 NormalizedEmail = "ADMIN@EMAIL.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<User>().HashPassword(null, "password"),
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "111111"),
                 SecurityStamp = string.Empty
             });
 

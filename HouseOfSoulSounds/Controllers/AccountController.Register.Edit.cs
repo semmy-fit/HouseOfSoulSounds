@@ -6,6 +6,9 @@ using HouseOfSoulSounds.Models.Identity;
 using HouseOfSoulSounds.Models;
 using System.IO;
 using System.Linq;
+using System;
+using Microsoft.AspNetCore.Http;
+using HouseOfSoulSounds.Models.Domain.Entities;
 
 namespace HouseOfSoulSounds.Controllers
 {
@@ -39,7 +42,7 @@ namespace HouseOfSoulSounds.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRegister(EditRegisterModel model)
+        public async Task<IActionResult> EditRegister(EditRegisterModel model, IFormFile titleImageFile)
         {
             if (!User.Identity.IsAuthenticated)
                 return await Register(ViewBag.returnUrl ?? "/");
@@ -62,6 +65,14 @@ namespace HouseOfSoulSounds.Controllers
 
             if (ModelState.IsValid)
             {
+                string imagePath1 = default;
+                if (titleImageFile is not null)
+                {
+                    //Assigning Unique Filename (Guid)
+                    var uniqueFileName = Convert.ToString(Guid.NewGuid());
+                    var FileExtension = Path.GetExtension(titleImageFile.FileName);
+                    imagePath1 = uniqueFileName + FileExtension;
+                }
                 bool todoEmail = false, todoName = false;
                 if (user.NormalizedEmail != model.Email.ToUpper())
                 {
@@ -88,6 +99,23 @@ namespace HouseOfSoulSounds.Controllers
 
                     if (result.Succeeded)
                     {
+                        if (!string.IsNullOrEmpty(titleImageFile?.FileName))
+                        {
+                            user = await userManager.FindByNameAsync(model.UserName);
+                            if (user is not null)
+                            {
+                                user.ImagePath = imagePath1;
+                                result = await userManager.UpdateAsync(user);
+                             
+                                    string path = Path.Combine(Config.AvatarsPath, imagePath1);
+                                    // сохраняем файл в папку Files в каталоге wwwroot
+                                    using (var fileStream = new FileStream(Config.WebRootPath + path, FileMode.Create))
+                                    {
+                                        await titleImageFile.CopyToAsync(fileStream);
+                                    }
+                                
+                            }
+                        }
 
                         if (todoName)
                             await signInManager.SignInAsync(user, false);
@@ -122,6 +150,26 @@ namespace HouseOfSoulSounds.Controllers
                 return Redirect(ViewBag.returnUrl ?? "/");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFile1(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                string path = "/Users/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(Path.Combine(Config.WebRootPath, path), FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                User file = new User { ImagePath = path };
+                _context.Users.Add(file);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Account/EditRegister");
         }
     }
 }

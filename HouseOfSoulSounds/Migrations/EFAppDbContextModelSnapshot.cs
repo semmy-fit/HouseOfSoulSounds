@@ -16,7 +16,7 @@ namespace HouseOfSoulSounds.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.Catalog", b =>
@@ -76,7 +76,7 @@ namespace HouseOfSoulSounds.Migrations
 
                     b.HasIndex("CatalogId");
 
-                    b.ToTable("InstrumentsItems");
+                    b.ToTable("InstrumentItems");
                 });
 
             modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.Message", b =>
@@ -156,7 +156,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("a543bcfd-b9ee-4584-a729-54d639a29535"),
                             CodeWord = "HomePage",
-                            DateAdded = new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Главная"
                         },
@@ -164,7 +164,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("1cbfb4cb-d7c9-4c36-8187-d1a411c643b7"),
                             CodeWord = "InstrumentsPage",
-                            DateAdded = new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Каталоги"
                         },
@@ -172,7 +172,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("7698042d-a1db-4190-bb09-cc8954954ced"),
                             CodeWord = "ContactsPage",
-                            DateAdded = new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Контакты"
                         });
@@ -254,14 +254,14 @@ namespace HouseOfSoulSounds.Migrations
                             Id = "A8B0919E-FA64-4F08-89C5-A37B5F003C00",
                             AccessFailedCount = 0,
                             Blocked = false,
-                            ConcurrencyStamp = "188ae21c-9233-465d-adec-a4f39197c60b",
+                            ConcurrencyStamp = "bcd52b7d-fcca-4a22-97c6-4e8ea37a9277",
                             Email = "admin@email.com",
                             EmailConfirmed = true,
                             ImagePath = "\\images\\avatars\\0.png",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAECbSYRIxDms5O7jHsEFMd2NT+Fy00mZp4miOUWA0sJ2W76PD0qfRVL2TO6ihEnORwQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENM/OfnBX8sIxcowjGoAx41KHYK3xo2YbRCRyXo7aRcHVhmVW/86fYz7Pg0+h6G8gw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -299,14 +299,14 @@ namespace HouseOfSoulSounds.Migrations
                         new
                         {
                             Id = "C3BD297D-2AEC-4582-B679-FDA3AA5164D3",
-                            ConcurrencyStamp = "c3f3f207-c04e-407f-9a64-6854ab8f9792",
+                            ConcurrencyStamp = "aea14bad-a7ce-4cbc-b615-015f4c02303f",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "DB25A8AF-4316-4FF6-BCB3-3A6CCE7CFE53",
-                            ConcurrencyStamp = "376c567b-144d-4ac7-be20-bf1355bb115b",
+                            ConcurrencyStamp = "2456bdaa-0034-4beb-808a-849ac2a712c1",
                             Name = "chatmoderator",
                             NormalizedName = "CHATMODERATOR"
                         });

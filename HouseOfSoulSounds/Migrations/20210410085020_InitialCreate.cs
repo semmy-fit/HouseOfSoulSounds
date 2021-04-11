@@ -187,7 +187,7 @@ namespace HouseOfSoulSounds.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InstrumentsItems",
+                name: "InstrumentItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -203,9 +203,9 @@ namespace HouseOfSoulSounds.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InstrumentsItems", x => x.Id);
+                    table.PrimaryKey("PK_InstrumentItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InstrumentsItems_Catalogs_CatalogId",
+                        name: "FK_InstrumentItems_Catalogs_CatalogId",
                         column: x => x.CatalogId,
                         principalTable: "Catalogs",
                         principalColumn: "Id",
@@ -232,9 +232,9 @@ namespace HouseOfSoulSounds.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Messages_InstrumentsItems_InstrumentItemId",
+                        name: "FK_Messages_InstrumentItems_InstrumentItemId",
                         column: x => x.InstrumentItemId,
-                        principalTable: "InstrumentsItems",
+                        principalTable: "InstrumentItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -244,23 +244,23 @@ namespace HouseOfSoulSounds.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "C3BD297D-2AEC-4582-B679-FDA3AA5164D3", "c3f3f207-c04e-407f-9a64-6854ab8f9792", "admin", "ADMIN" },
-                    { "DB25A8AF-4316-4FF6-BCB3-3A6CCE7CFE53", "376c567b-144d-4ac7-be20-bf1355bb115b", "chatmoderator", "CHATMODERATOR" }
+                    { "C3BD297D-2AEC-4582-B679-FDA3AA5164D3", "aea14bad-a7ce-4cbc-b615-015f4c02303f", "admin", "ADMIN" },
+                    { "DB25A8AF-4316-4FF6-BCB3-3A6CCE7CFE53", "2456bdaa-0034-4beb-808a-849ac2a712c1", "chatmoderator", "CHATMODERATOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Blocked", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImagePath", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "A8B0919E-FA64-4F08-89C5-A37B5F003C00", 0, false, "188ae21c-9233-465d-adec-a4f39197c60b", "admin@email.com", true, "\\images\\avatars\\0.png", false, null, "ADMIN@EMAIL.COM", "admin", "AQAAAAEAACcQAAAAECbSYRIxDms5O7jHsEFMd2NT+Fy00mZp4miOUWA0sJ2W76PD0qfRVL2TO6ihEnORwQ==", null, false, "", false, "admin" });
+                values: new object[] { "A8B0919E-FA64-4F08-89C5-A37B5F003C00", 0, false, "bcd52b7d-fcca-4a22-97c6-4e8ea37a9277", "admin@email.com", true, "\\images\\avatars\\0.png", false, null, "ADMIN@EMAIL.COM", "admin", "AQAAAAEAACcQAAAAENM/OfnBX8sIxcowjGoAx41KHYK3xo2YbRCRyXo7aRcHVhmVW/86fYz7Pg0+h6G8gw==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "TextFields",
                 columns: new[] { "Id", "CodeWord", "DateAdded", "MetaDescription", "MetaKeywords", "MetaTitle", "Subtitle", "Text", "Title", "TitleImagePath" },
                 values: new object[,]
                 {
-                    { new Guid("a543bcfd-b9ee-4584-a729-54d639a29535"), "HomePage", new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Главная", null },
-                    { new Guid("1cbfb4cb-d7c9-4c36-8187-d1a411c643b7"), "InstrumentsPage", new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Каталоги", null },
-                    { new Guid("7698042d-a1db-4190-bb09-cc8954954ced"), "ContactsPage", new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Контакты", null }
+                    { new Guid("a543bcfd-b9ee-4584-a729-54d639a29535"), "HomePage", new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Главная", null },
+                    { new Guid("1cbfb4cb-d7c9-4c36-8187-d1a411c643b7"), "InstrumentsPage", new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Каталоги", null },
+                    { new Guid("7698042d-a1db-4190-bb09-cc8954954ced"), "ContactsPage", new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc), null, null, null, null, "Содержание заполняется администратором", "Контакты", null }
                 });
 
             migrationBuilder.InsertData(
@@ -313,8 +313,8 @@ namespace HouseOfSoulSounds.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstrumentsItems_CatalogId",
-                table: "InstrumentsItems",
+                name: "IX_InstrumentItems_CatalogId",
+                table: "InstrumentItems",
                 column: "CatalogId");
 
             migrationBuilder.CreateIndex(
@@ -358,7 +358,7 @@ namespace HouseOfSoulSounds.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "InstrumentsItems");
+                name: "InstrumentItems");
 
             migrationBuilder.DropTable(
                 name: "Catalogs");

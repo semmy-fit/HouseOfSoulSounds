@@ -24,6 +24,7 @@
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
     <None Include="Views\Account\ResetPassword.cshtml" />
+    <None Include="Views\CatalogsItems\Edit.cshtml" />
     <None Include="wwwroot\images\icons\icon-arrow-left.svg" />
     <None Include="wwwroot\images\icons\icon-arrow-right.svg" />
     <None Include="wwwroot\images\icons\icon-arrow-up.svg" />

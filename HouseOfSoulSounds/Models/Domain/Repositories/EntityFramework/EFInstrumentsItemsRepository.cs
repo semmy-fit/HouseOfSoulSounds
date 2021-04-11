@@ -10,9 +10,9 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
     {
         private readonly EFAppDbContext context;
         public EFInstrumentsItemsRepository(EFAppDbContext context) => this.context = context;
-        public IQueryable<InstrumentItem> Items => context.InstrumentsItems;
+        public IQueryable<InstrumentItem> Items => context.InstrumentItems;
 
-        public InstrumentItem GetItemById(Guid id) => context.InstrumentsItems.FirstOrDefault(x => x.Id == id);
+        public InstrumentItem GetItemById(Guid id) => context.InstrumentItems.FirstOrDefault(x => x.Id == id);
 
         public void SaveItem(InstrumentItem entity)
         {
@@ -25,7 +25,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
 
         public void DeleteItem(Guid id)
         {
-            context.InstrumentsItems.Remove(new InstrumentItem() { Id = id });
+            context.InstrumentItems.Remove(new InstrumentItem() { Id = id });
             context.SaveChanges();
         }
         public IQueryable<InstrumentItem> GetMessages(Guid id)
