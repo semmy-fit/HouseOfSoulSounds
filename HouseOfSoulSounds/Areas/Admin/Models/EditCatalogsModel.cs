@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using HouseOfSoulSounds.Models.Domain;
 using HouseOfSoulSounds.Models.Domain.Entities;
 
 namespace HouseOfSoulSounds.Areas.Admin.Models
@@ -19,9 +20,7 @@ namespace HouseOfSoulSounds.Areas.Admin.Models
         public string Title { get; set; }
 
         [Display(Name = "Инструменты")]
-        public IEnumerable<InstrumentItem>? InstrumentItems;
-        
-
+        public IQueryable<InstrumentItem>? InstrumentItems { get; set; }
 
     }
 }

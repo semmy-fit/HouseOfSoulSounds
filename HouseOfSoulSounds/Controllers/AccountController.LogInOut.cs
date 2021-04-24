@@ -56,7 +56,7 @@ namespace HouseOfSoulSounds.Controllers
                         {
                             var roles = await userManager.GetRolesAsync(user);
                             if (roles?.Contains(Config.RoleAdmin) == true)
-                                returnUrl = "Account/EditRegister";
+                                returnUrl = "/Account/EditRegister";
                             else returnUrl = "/Account/EditRegister";
                         }
 

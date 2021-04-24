@@ -3,7 +3,7 @@
 <header class="s-header header">
 
     <div class="header__logo">
-        <a class="logo" href="index.html">
+        <a class="logo" href='@Url.Action("Index", "Home")'>
             <img src="images/logo.jpg" alt="Homepage">
         </a>
     </div> <!-- end header__logo -->
@@ -37,6 +37,10 @@
                         @User.Identity.Name.ToLower()
                     </a>
                 </li>
+                @if (User.Identity.Name == "admin")
+                {
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index">Панель администратора</a>
+                }
                 <li> <a asp-area="" asp-controller="Account" asp-action="Logout">выход</a></li>
             }
             else
@@ -44,14 +48,14 @@
                 <li><a asp-area="" asp-controller="Account" asp-action="Login">войти</a></li>
                 <li> <a asp-area="" asp-controller="Account" asp-action="Register">регистрация</a></li>
             }
-            <li class="current"><a href="index.html" title="">Home</a></li>
+            <li class="current"><a href='@Url.Action("Index", "Home")' title="">Home</a></li>
             <li class="has-children">
                 <a href="#0" title="">Categories</a>
                 <ul class="sub-menu">
-                    <li><a href="Instruments/Index">Instruments</a></li>
-                    <li><a href="Carts">Carts</a></li>
-                    <li><a href="Barabans">Barabans</a></li>
-                    <li><a href="Wind">Духовые</a></li>
+                    <li><a href='@Url.Action("About", "Instruments")'>Instruments</a></li>
+                    <li><a href='@Url.Action("Carts", "Carts")'>Carts</a></li>
+                    <li><a href='@Url.Action("Index", "Barabans")'>Barabans</a></li>
+                    <li><a href='@Url.Action("Index", "Wind")'>Духовые</a></li>
                     <li><a href="">Ударные</a></li>
                     <li><a href="">Струнные</a></li>
                 </ul>
@@ -64,12 +68,12 @@
                     <li><a href="single-standard.html">Standard Post</a></li>
                 </ul>
             </li>
-            <li><a href="Account/Login" title="">Вход</a></li>
-            <li><a href="Account/Logout" title="">Выход</a></li>
-            <li><a href="Account/Register" title="">Регистрация</a></li>
-            <li><a href="page-about.html" title="">About</a></li>
-            <li><a href="page-contact.html" title="">Contact</a></li>
-            <li><a href="" title="">Instruments</a></li>
+            @*<li><a href='@Url.Action("Login", "Account")' title="">Вход</a></li>
+        <li><a href='@Url.Action("Logout", "Account")' title="">Выход</a></li>
+        <li><a href='@Url.Action("Register", "Account")' title="">Регистрация</a></li>*@
+            <li><a href='@Url.Action("Info", "Home")' title="">About</a></li>
+            <li><a href='@Url.Action("Privacy", "Home")' title="">Contact</a></li>
+            @*<li><a href="" title="">Instruments</a></li>*@
 
         </ul> <!-- end header__nav -->
 

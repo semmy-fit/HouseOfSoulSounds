@@ -147,7 +147,7 @@ namespace HouseOfSoulSounds.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("Avatars/Index");
+            return RedirectToAction("Admin/Home/Index");
         }
     }
 }

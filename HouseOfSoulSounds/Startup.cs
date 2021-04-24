@@ -63,8 +63,8 @@ namespace HouseOfSoulSounds
             {
                 options.Cookie.Name = "HouseOfSoulSoundsAuth";
                 options.Cookie.HttpOnly = true;
-                options.LoginPath = "/account/login";
-                options.AccessDeniedPath = "/account/accessdenied";
+                options.LoginPath = "/Login";
+                options.AccessDeniedPath = "/Accessdenied";
                 options.SlidingExpiration = true;
             });
 

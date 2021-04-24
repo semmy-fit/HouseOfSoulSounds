@@ -1,98 +1,122 @@
-﻿@model IEnumerable<EditCatalogsModel>
+﻿
+@model ViewModel
     @{
         string strTitle = "Панель администратора";
         ViewBag.Title = strTitle;
+  
 
-     
     }
 
-<div>
-    <h2>@strTitle</h2>
     <div>
-        <h3>Управление пользователями и их правами</h3>
-         
-        <h3>Каталоги и иснтрументы</h3>
-
-        @using (Html.BeginForm("NewCatalog", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <!-- атрибут name такой же как в контроллере у метода параметр -->
-                <input type="text" name="title" id="add" />
-                <button class="btn btn-info" type="submit">Добавить</button>
-            </div>
-        }
-    <div>
-        @if (Model.Any())
-        {
-
-            @foreach (var item in Model)
-            {
-               
+        <h2>@strTitle</h2>
         <div>
-            @using (Html.BeginForm("Edit", "Instrument", FormMethod.Post))
+            <h3>Управление пользователями и их правами</h3>
+            <div class="div-box">
+                <a asp-area="Admin" asp-controller="Roles" asp-action="Index">Список пользователей</a>
+            </div>
+            <h3>Каталоги и инструменты</h3>
+
+            @using (Html.BeginForm("NewCatalog", "Home", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <details>
-                    <input type="hidden" name="Id" value="@item.Id"/>
-                    <summary>  @item.Title</summary>
+                <div class="form-horizontal">
+                    <!-- атрибут name такой же как в контроллере у метода параметр -->
+                    <input type="text" name="title" id="add" />
                     <button class="btn btn-info" type="submit">Добавить</button>
-                </details>
-            </div>
-            }
-           
-
-            |
-            @Html.ActionLink("удалить", "DeleteCatalog", "Home", new { id = item.Id },
-                new { onclick = $"return confirm('Удалить безвозвратно событие: \"{@item.Title}\"?')" })
-            |
-
-        </div>
-
-
-            }
-        }
-    </div>
-
-        @*<form asp-action="NewCatalog" asp-controller="Home">
-                @foreach (var title in Model)
-                {
-
-                <div class="form-group">
-                    <label asp-for="@title.Title" class="control-label">Title</label>
-                    <input type="text" asp-for="@title.Title" name="Title" class="form-control" />
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Отправить" class="btn btn-default" />
-                </div>
-                }
-            </form>*@
-
-        @*<@foreach (var title in Model)
-                {
-                 <input type="text" asp-for="@title.Title" name ="title" class="form-con" />
-                <a asp-area="Admin" asp-controller="Home" asp-action="NewCatalog"  asp-route-codeWord="@title.">Главная</a>
+            }
             <div>
-                <input type="text" asp-for="@newCatalog" name="title" class="form-con" />
-                |
-                <a asp-area="Admin" asp-controller="Home" asp-action="NewCatalog" asp-route-id="@newCatalog">редактировать</a>
-                |
-                @Html.ActionLink("удалить", "Delete", "EventItems", new { id = title.Id },
-                             new { onclick = $"return confirm('Удалить безвозвратно событие: \"{title.Title}\"?')" })
-                |
-                <a asp-area="" asp-controller="Events" asp-action="Index" asp-route-id="@title.Id">
-                    @($"{title.Title}")
-                </a>
+
+                @foreach (var item in Model.editCatalogs)
+                {
+
+                    <div>
+                        @using (Html.BeginForm("Edit", "Instrument", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                <details>
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <summary>@item.Title </summary>
+
+                                    @foreach (var d in Model.editInstruments.Where(c=>c.CatalogId==item.Id))
+                                    {
+                                       
+                                <ul>
+                                    @d.Title.ToString()
+
+                                    |
+                                    @Html.ActionLink("удалить", "DeleteInstrument", "Home", new { id = d.Id },
+                                        new { onclick = $"return confirm('Удалить безвозвратно событие: \"{@d.Title}\"?')" })
+                                    |
+
+                                </ul>                               
+       
+                                    }
+
+
+                                    <button class="btn btn-info" type="submit">Добавить</button>
+                                </details>
+                            </div>
+                        }
+
+
+                        |
+                        @Html.ActionLink("удалить", "DeleteCatalog", "Home", new { id = item.Id },
+                            new { onclick = $"return confirm('Удалить безвозвратно событие: \"{@item.Title}\"?')" })
+                        |
+
+                    </div>
+
+
+                }
+
             </div>
-                }*@
+
+            @*<form asp-action="NewCatalog" asp-controller="Home">
+                    @foreach (var title in Model)
+                    {
+
+                    <div class="form-group">
+                        <label asp-for="@title.Title" class="control-label">Title</label>
+                        <input type="text" asp-for="@title.Title" name="Title" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Отправить" class="btn btn-default" />
+                    </div>
+                    }
+                </form>*@
+
+            @*<@foreach (var title in Model)
+                    {
+                     <input type="text" asp-for="@title.Title" name ="title" class="form-con" />
+                    <a asp-area="Admin" asp-controller="Home" asp-action="NewCatalog"  asp-route-codeWord="@title.">Главная</a>
+                <div>
+                    <input type="text" asp-for="@newCatalog" name="title" class="form-con" />
+                    |
+                    <a asp-area="Admin" asp-controller="Home" asp-action="NewCatalog" asp-route-id="@newCatalog">редактировать</a>
+                    |
+                    @Html.ActionLink("удалить", "Delete", "EventItems", new { id = title.Id },
+                                 new { onclick = $"return confirm('Удалить безвозвратно событие: \"{title.Title}\"?')" })
+                    |
+                    <a asp-area="" asp-controller="Events" asp-action="Index" asp-route-id="@title.Id">
+                        @($"{title.Title}")
+                    </a>
+                </div>
+                    }*@
+            <div class="div-box">
+                <h3>Редактировать страницы сайта</h3>
+                <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="HomePage">Главная</a>
+                <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="EventsPage">Инструменты</a>
+                <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="ContactsPage">Контакты</a>
+            </div>
+        </div>
+        <div class="div-box">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                <input type="submit" value="Выйти" />
+            </form>
+        </div>
     </div>
-    <div class="div-box">
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
-            <input type="submit" value="Выйти" />
-        </form>
-    </div>
-</div>
-     
-           
-            
+
+
+

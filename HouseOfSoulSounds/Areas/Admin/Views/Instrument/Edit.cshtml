@@ -9,13 +9,18 @@
 <div>
     <h2>@strTitle</h2>
     <div>
-        <form asp-area="Admin" asp-controller="Instrument" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-area="Admin" asp-controller="Instrument" asp-action="NewInstrument" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="TitleImagePath" />
 
             @if (!ViewData.ModelState.IsValid)
             {
-<div class="warning-text" asp-validation-summary="All"></div>            }
+        <div class="warning-text" asp-validation-summary="All"></div>}
+            <div class="div-box">
+                <label asp-for="Id"></label>
+                <input asp-for="Id" />
+                <span class="warning-text" asp-validation-for="Id"></span>
+            </div>
             <div class="div-box">
                 <label asp-for="Title"></label>
                 <input asp-for="Title" />
@@ -33,13 +38,19 @@
                 <span class="warning-text" asp-validation-for="Text"></span>
             </div>
             <div class="div-box">
+                <label asp-for="CatalogId"></label>
+                <textarea asp-for="CatalogId"></textarea>
+                <span class="warning-text" asp-validation-for="CatalogId"></span>
+            </div>
+            <div class="div-box">
                 <label asp-for="TitleImagePath"></label>
-                <input type="file" name="titleImageFile" id="titleImageFile" />
+
                 @if (!string.IsNullOrWhiteSpace(Model.TitleImagePath))
                 {
-    <div>
-        <img class="img-block" src="~/images/DB/@Model.TitleImagePath" />
-    </div>}
+        <div>
+            <img class="img-block" src="~/images/DB/@Model.TitleImagePath" />
+        </div>}
+                <input type="file" name="titleImageFile" id="titleImageFile" />
             </div>
             <div class="div-box">
                 <label asp-for="MetaTitle"></label>
@@ -56,14 +67,20 @@
                 <input asp-for="MetaKeywords" />
                 <span class="warning-text" asp-validation-for="MetaKeywords"></span>
             </div>
+            <div class="div-box">
+                <label asp-for="DateAdded"></label>
+                <input asp-for="DateAdded" type="date" />
+                <span class="warning-text" asp-validation-for="DateAdded"></span>
+            </div>
+           
             @if (!ViewData.ModelState.IsValid && ViewData.ModelState["SaveImgError"]?.Errors.Count > 0)
             {
-<div class="alert" role="alert">
-    <div class="div-color-red">
-        <strong>Не удалось сохранить из-за титульной картинки!</strong><br />
-        @ViewData.ModelState["SaveImgError"].Errors.First().ErrorMessage
-    </div>
-</div>            }
+        <div class="alert" role="alert">
+            <div class="div-color-red">
+                <strong>Не удалось сохранить из-за титульной картинки!</strong><br />
+                @ViewData.ModelState["SaveImgError"].Errors.First().ErrorMessage
+            </div>
+        </div>}
             <input type="submit" value="Сохранить" />
         </form>
     </div>

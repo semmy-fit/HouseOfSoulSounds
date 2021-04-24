@@ -13,7 +13,17 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         public IQueryable<InstrumentItem> Items => context.InstrumentItems;
 
         public InstrumentItem GetItemById(Guid id) => context.InstrumentItems.FirstOrDefault(x => x.Id == id);
-
+      
+        public IQueryable<InstrumentItem> GetInstrumentInCatalog(Guid id)
+        {
+            var item = context.InstrumentItems;
+            if(item is not null && item.Any())
+            {
+                item.Select(z => z.Title);
+                return ((IQueryable<InstrumentItem>)item.Select(x =>x.Title)).AsQueryable();
+            }
+            return null; 
+        }
         public void SaveItem(InstrumentItem entity)
         {
             if (entity.Id == default)
@@ -25,6 +35,10 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
 
         public void DeleteItem(Guid id)
         {
+            foreach (var item in context.InstrumentItems.Where(x => x.CatalogId == id))
+            {
+                context.InstrumentItems.Remove(item);
+            }
             context.InstrumentItems.Remove(new InstrumentItem() { Id = id });
             context.SaveChanges();
         }

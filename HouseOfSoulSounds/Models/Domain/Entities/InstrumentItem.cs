@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace HouseOfSoulSounds.Models.Domain.Entities
 {
@@ -18,7 +20,10 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         public Guid  CatalogId { get; set; }
         [ForeignKey("CatalogId")]
         public Catalog Catalog { get; set; }
+        public IQueryable<InstrumentItem>? Instruments;
 
+     
+        
     }
 
 }
