@@ -1,0 +1,82 @@
+﻿@model NewPage
+@{ string strTitle = Model.Id == default
+                     ? "Добавить новую страницу"
+                     : "Редактировать страницу";
+    ViewBag.Title = strTitle; }
+
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <form asp-area="Admin" asp-controller="CreatePage" asp-action="NewPage" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImagePage" />
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+        <div class="warning-text" asp-validation-summary="All"></div>}
+
+            <div class="div-box">
+                <label asp-for="Id"></label>
+                <input asp-for="Id" />
+                <span class="warning-text" asp-validation-for="Id"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="PageTitle"></label>
+                <input asp-for="PageTitle" />
+                <span class="warning-text" asp-validation-for="PageTitle"></span>
+            </div>
+
+            <div class="div-box">
+                <label asp-for="BaseText"></label>
+                <textarea asp-for="BaseText"></textarea>
+                <span class="warning-text" asp-validation-for="BaseText"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Saidbar_text"></label>
+                <textarea asp-for="Saidbar_text"></textarea>
+                <span class="warning-text" asp-validation-for="Saidbar_text"></span>
+
+                <div class="div-box">
+                    <label asp-for="ImagePage"></label>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.ImagePage))
+                    {
+        <div>
+            <img class="img-block" src="~/images/Page/@Model.ImagePage" />
+        </div>}
+                    <input type="file" name="titleImageFile1" id="titleImageFile1" />
+                </div>
+
+
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["SaveImgError"]?.Errors.Count > 0)
+                {
+        <div class="alert" role="alert">
+            <div class="div-color-red">
+                <strong>Не удалось сохранить из-за титульной картинки!</strong><br />
+                @ViewData.ModelState["SaveImgError"].Errors.First().ErrorMessage
+            </div>
+        </div>}
+                <input type="submit" value="Сохранить" />
+        </form>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.BaseText)');
+        newCKEdit.updateElement();
+    }
+</script>
+
+<script type="text/javascript">
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["SaveImgError"]?.Errors.Count > 0)
+        {
+            <text>
+            $(document).ready(function() {
+                alert('@ViewData.ModelState["SaveImgError"].Errors.First().ErrorMessage');
+            });
+            </text>
+        }
+</script>

@@ -20,10 +20,10 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         public Guid  CatalogId { get; set; }
         [ForeignKey("CatalogId")]
         public Catalog Catalog { get; set; }
-        public IQueryable<InstrumentItem>? Instruments;
 
-     
-        
+        public IList<Message> Messages { get; set; }
+
+       
     }
 
 }

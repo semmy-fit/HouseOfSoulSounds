@@ -1,0 +1,29 @@
+﻿@model InstrumentItem
+@*
+    
+*@
+@{
+}
+<div>
+    <h2>
+        @Model.Title
+    </h2>
+    <div>
+        <label>@Model.DateAdded</label>
+    </div>
+    <p>
+        @Model.CatalogId
+    </p>
+    <p>
+        @Model.Subtitle
+    </p>
+    @if (!string.IsNullOrWhiteSpace(Model.TitleImagePath))
+    {
+        <div>
+            <img class="" src="~/images/DB/@Model.TitleImagePath" />,
+        </div>
+    }
+</div>
+<div>
+    @Html.Raw(Model.Text)
+</div>

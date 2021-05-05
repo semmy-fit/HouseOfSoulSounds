@@ -10,6 +10,8 @@ namespace HouseOfSoulSounds.Areas.Admin.Models
  //       public string Email { get; set; }
         public IEnumerable<IdentityRole> AllRoles { get; set; }
         public IEnumerable<string> UserRoles { get; set; }
+        public string Email { get; set; }
+
         public ChangeRoleModel()
         {
             AllRoles = new List<IdentityRole>();

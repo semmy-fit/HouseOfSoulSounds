@@ -11,6 +11,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
 using HouseOfSoulSounds.Models.Identity;
+using HouseOfSoulSounds.Areas.Admin.Models;
 
 
 namespace HouseOfSoulSounds.Models.Domain
@@ -24,6 +25,7 @@ namespace HouseOfSoulSounds.Models.Domain
         public DbSet<Message> Messages { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<NewPage> Pages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

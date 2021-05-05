@@ -42,7 +42,7 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
                 {
                     Id = user.Id,
                     UserName = user.UserName,
-                   // Email = user.Email,
+                    Email = user.Email,
                     UserRoles = userRoles,
                     AllRoles = allRoles
                 };
@@ -50,7 +50,7 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
             }
             ModelState.AddModelError(String.Empty,
                 "Выбранного пользователя больше не существует");
-            return View();
+            return null;
         }
 
         [HttpPost]
@@ -75,7 +75,7 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
                 if (add)
                 {
                     if (!user.EmailConfirmed && 
-                        (addRoles.Contains(RoleModerator) ))
+                        (addRoles.Contains(RoleModer) ))
                     {
                         user.EmailConfirmed = true;
                         await userManager.UpdateAsync(user);

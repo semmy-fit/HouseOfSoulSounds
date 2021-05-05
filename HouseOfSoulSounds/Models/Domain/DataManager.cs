@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HouseOfSoulSounds.Models.Domain.Entities;
 using HouseOfSoulSounds.Models.Domain.Repositories.Abstract;
 
 namespace HouseOfSoulSounds.Models.Domain
@@ -9,12 +10,14 @@ namespace HouseOfSoulSounds.Models.Domain
         public ICatalogsRepository Catalogs { get; set; }
         public IMessageRepository Message { get; set; }
         public IInstrumentsItemsRepository Instruments { get; set; }
+        public IPageRepository Pages { get; set; }
 
         public DataManager(
             ITextFieldsRepository textFieldsRepository,
            ICatalogsRepository catalogsRepository,
            IMessageRepository messageRepository,
-           IInstrumentsItemsRepository instrumentsItemsRepository
+           IInstrumentsItemsRepository instrumentsItemsRepository,
+           IPageRepository pageItemsBaseRepository
            )
 
         {
@@ -22,6 +25,8 @@ namespace HouseOfSoulSounds.Models.Domain
             Catalogs = catalogsRepository;
             Message = messageRepository;
             Instruments = instrumentsItemsRepository;
+            Pages = pageItemsBaseRepository;
+
         }
     }
 }

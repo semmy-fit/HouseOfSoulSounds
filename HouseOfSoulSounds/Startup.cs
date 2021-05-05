@@ -42,8 +42,16 @@ namespace HouseOfSoulSounds
             services.AddTransient<IInstrumentsItemsRepository, EFInstrumentsItemsRepository>();
             services.AddTransient<IMessageRepository, EFMessagesRepository>();
             services.AddTransient<ICatalogsRepository, EFCatalogsRepository>();
+            services.AddTransient<IPageRepository, EFPageRepository>();
             services.AddTransient<DataManager>();
+            services.AddSingleton<ConnectionDictionary<string>> ();
+            services.AddSignalR().AddHubOptions<ChatHub>
+                (hubOptions =>
+                {
+                    hubOptions.EnableDetailedErrors = true;
+                    hubOptions.KeepAliveInterval = System.TimeSpan.FromMinutes(120);
 
+                });
       
             string connection = Configuration.GetConnectionString("DefaultConnection");
           services.AddDbContext<EFAppDbContext>(options => options.UseSqlServer(connection));

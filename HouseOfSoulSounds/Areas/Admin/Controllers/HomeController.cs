@@ -13,6 +13,7 @@ using System.IO;
 using HouseOfSoulSounds.Helpers;
 using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HouseOfSoulSounds.Areas.Admin.Controllers
 {
@@ -36,7 +37,7 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
             IQueryable<EditCatalogsModel> model = from n in dataManager.Catalogs.Items
                                                   select new EditCatalogsModel { Id = n.Id, Title = n.Title };
             IQueryable<InstrumentItem> inst_model = from x in dataManager.Instruments.Items
-                                                    select new InstrumentItem { CatalogId=x.CatalogId,Title = x.Title };
+                                                    select new InstrumentItem {Id=x.Id, CatalogId=x.CatalogId,Title = x.Title };
 
 
             //ViewModel two_model = new ViewModel {editCatalogs=model,editInstruments=inst_model };
@@ -86,7 +87,17 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
          
             return View(inst_model);
         }
+        public IActionResult Edit(Guid id, InstrumentItem instrument)
+        {
 
+            // var mode = dataManager.Instruments.Items.Where(z => z.Id == id);
+            //var instrumentCatalog = _context.InstrumentItems.Include(z => z.Title == z.Title);
+            var entity = new InstrumentItem() { CatalogId = id, Catalog = instrument.Catalog };
+
+
+            // return RedirectToAction("Edit","Instrument",mode.Where(x=>x.Id==id));
+            return RedirectToAction("NewInstrument", "Instrument",entity.Id);
+        }
         public IActionResult DeleteInstrument(Guid id)
         {
             IQueryable<InstrumentItem> instrumentItems = from x in dataManager.Instruments.Items

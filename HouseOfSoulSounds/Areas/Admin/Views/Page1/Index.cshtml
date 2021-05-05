@@ -1,0 +1,87 @@
+@model IQueryable<InstrumentItem>
+@{
+    string strTitle = "New page";
+    ViewBag.Title = strTitle;
+}
+<div>
+
+    @foreach (var item in Model)
+    {
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+                *:before, *:after {
+                    box-sizing: border-box;
+                }
+
+
+
+            .wrap {
+                width: 100%;
+                height: 100%;
+                background: gray;
+                padding: 15px 7.5px;
+                display: flex;
+            }
+
+                .wrap div[class^='block-'] {
+                    width: calc(100% / 3);
+                    min-height: 100px;
+                    padding: 10px;
+                    margin: 0 7.5px;
+                    text-align: center;
+                    background: white;
+                }
+
+                    .wrap div[class^='block-'] img {
+                        display: block;
+                        height: auto;
+                        max-width: 100%;
+                        border: 1px solid gray;
+                        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .wrap div[class^='block-'] p.price .price-count {
+                        color: red;
+                    }
+        </style>
+        <input type="hidden" asp-for="@item.TitleImagePath" />
+        
+            <div class="wrap">
+               
+               
+                 <div class="block-0">
+                    <img src="~/images/DB/@item.TitleImagePath" alt="ls-sample1" />
+                    <h2 class="title">@item.Title</h2>
+                    <p class="sub-title">@item.Subtitle</p>
+                </div>
+             
+            </div>
+
+  
+        @*<p>@item.PageTitle</p>
+            <div>
+                @item.ImagePage
+            </div>
+            <div>
+                @item.BaseText
+            </div>
+            <div>@item.Saidbar_text</div>*@
+    }
+</div>
+<div>
+    @using (Html.BeginForm("Edit", "CreatePage", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <!-- атрибут name такой же как в контроллере у метода параметр -->
+        <input type="text" name="titleImagePath1" id="add" />
+        <a asp-area="Admin" asp-action="Addname" asp-controller="CreatePage">Выбор имени контроллера</a>
+
+        <button class="btn btn-info" type="submit">Добавить</button>
+    </div>
+    }
+</div>
+    

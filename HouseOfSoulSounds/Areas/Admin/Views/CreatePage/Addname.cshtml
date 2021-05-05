@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-area="Admin" asp-controller="CreatePage" asp-action="Addname" method="post">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="div-box">
+        <label>Для создания страницы,вам необходимо создать контроллер,модель и представление. Для создания контроллера выберите path,а для модели - model_path.</label>
+        <label>Чтобы создать представление выберите - view_path. Заполните их нужным кодом.</label>  
+    </div>
+        <div class="div-box">
+            <label> Select path to save</label>
+            <input type="radio" name="path_s" value="01" />controller_path<br>
+            <input type="radio" name="path_s" value="02" />model_path<br>
+            <input type="radio" name="path_s" value="03" />view_path
+        </div>
+        <div class="div-box">
+            <label> Name controller and expension</label>
+            <input type="text" name="str1" />
+        </div>
+        <div class="div-box">
+            <label> Name class conrollers</label>
+            <input type="text" name="str2" />
+        </div>
+
+        <div class="div-box">
+            <label> Edit text controller</label>
+            <textarea name="lines"></textarea>
+        </div>
+        <input type="submit" value="Сохранить" />
+</form>

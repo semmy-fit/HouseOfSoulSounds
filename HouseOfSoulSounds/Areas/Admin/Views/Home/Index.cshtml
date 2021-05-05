@@ -25,40 +25,45 @@
                     <button class="btn btn-info" type="submit">Добавить</button>
                 </div>
             }
+
             <div>
 
                 @foreach (var item in Model.editCatalogs)
                 {
 
                     <div>
-                        @using (Html.BeginForm("Edit", "Instrument", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
+                      
+                          
                             <div class="form-horizontal">
                                 <details>
                                     <input type="hidden" name="Id" value="@item.Id" />
                                     <summary>@item.Title </summary>
 
-                                    @foreach (var d in Model.editInstruments.Where(c=>c.CatalogId==item.Id))
+                                    @foreach (var d in Model.editInstruments.Where(c => c.CatalogId == item.Id))
                                     {
-                                       
-                                <ul>
-                                    @d.Title.ToString()
 
-                                    |
-                                    @Html.ActionLink("удалить", "DeleteInstrument", "Home", new { id = d.Id },
-                                        new { onclick = $"return confirm('Удалить безвозвратно событие: \"{@d.Title}\"?')" })
-                                    |
+                                        <ul>
+                                           <a asp-area="" asp-action="Index" asp-controller="Instruments" asp-route-id="@d.Id"> @d.Title.ToString()</a>
+                                            |
 
-                                </ul>                               
-       
+                                            <a asp-area="Admin" asp-action="Edit" asp-controller="Instrument" asp-route-id="@d.Id">Редактировать</a>
+
+
+                                            |
+                                            @Html.ActionLink("удалить", "DeleteInstrument", "Home", new { id = d.Id },
+                                                new { onclick = $"return confirm('Удалить безвозвратно событие: \"{@d.Title}\"?')" })
+                                            |
+
+                                        </ul>
+
+
                                     }
 
 
-                                    <button class="btn btn-info" type="submit">Добавить</button>
+                                    <a asp-area="Admin" asp-action="Edit" asp-controller="Instrument" asp-route-id="@item.Id">Добавить</a>
                                 </details>
                             </div>
-                        }
+                        
 
 
                         |

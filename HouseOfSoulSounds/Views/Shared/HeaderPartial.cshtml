@@ -37,7 +37,7 @@
                         @User.Identity.Name.ToLower()
                     </a>
                 </li>
-                @if (User.Identity.Name == "admin")
+                @if (User.IsInRole(Config.RoleAdmin))
                 {
                 <a asp-area="Admin" asp-controller="Home" asp-action="Index">Панель администратора</a>
                 }

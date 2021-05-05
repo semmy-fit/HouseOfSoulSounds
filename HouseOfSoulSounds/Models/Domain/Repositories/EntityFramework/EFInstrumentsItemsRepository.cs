@@ -12,7 +12,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         public EFInstrumentsItemsRepository(EFAppDbContext context) => this.context = context;
         public IQueryable<InstrumentItem> Items => context.InstrumentItems;
 
-        public InstrumentItem GetItemById(Guid id) => context.InstrumentItems.FirstOrDefault(x => x.Id == id);
+        public InstrumentItem GetItemById(Guid id) => context.InstrumentItems.Include(i=>i.Messages).FirstOrDefault(x => x.Id == id);
       
         public IQueryable<InstrumentItem> GetInstrumentInCatalog(Guid id)
         {
@@ -20,7 +20,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
             if(item is not null && item.Any())
             {
                 item.Select(z => z.Title);
-                return ((IQueryable<InstrumentItem>)item.Select(x =>x.Title)).AsQueryable();
+                return ((IQueryable<InstrumentItem>)item.Select(x =>x.Title));
             }
             return null; 
         }
