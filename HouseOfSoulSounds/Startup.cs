@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using HouseOfSoulSounds.Models.Domain.Repositories.Abstract;
 using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
-
+using Microsoft.AspNetCore.Http.Connections;
 namespace HouseOfSoulSounds
 {
     public class Startup
@@ -49,7 +49,7 @@ namespace HouseOfSoulSounds
                 (hubOptions =>
                 {
                     hubOptions.EnableDetailedErrors = true;
-                    hubOptions.KeepAliveInterval = System.TimeSpan.FromMinutes(120);
+                    hubOptions.KeepAliveInterval = System.TimeSpan.FromMinutes(29);
 
                 });
       
@@ -82,6 +82,7 @@ namespace HouseOfSoulSounds
             {
                 x.AddPolicy("AdminArea", policy
                     => { policy.RequireRole(Config.RoleAdmin); });
+         
             });
 
             //добавляем сервисы для контроллеров и представлений (MVC)
@@ -89,6 +90,7 @@ namespace HouseOfSoulSounds
             services.AddControllersWithViews(x =>
             {
                 x.Conventions.Add(new AreasAuthorization("Admin", "AdminArea"));
+              
             })
                 //выставляем совместимость с asp.net core 3.0
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
@@ -116,19 +118,29 @@ namespace HouseOfSoulSounds
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseDefaultFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
           
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chatHub",
+                   options =>
+                   {
+                       options.ApplicationMaxBufferSize = 256;
+                       options.TransportMaxBufferSize = 256;
+                       options.Transports = HttpTransportType.WebSockets;
+                   });
                 endpoints.MapControllerRoute(Config.Admin,
                     "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-           
+         
+               
+
+
             });
             //app.UseEndpoints(endpoints =>
             //{

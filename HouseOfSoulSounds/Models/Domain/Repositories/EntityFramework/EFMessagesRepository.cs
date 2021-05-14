@@ -5,8 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using HouseOfSoulSounds.Models.Domain.Entities;
 using HouseOfSoulSounds.Models.Domain.Repositories.Abstract;
+using HouseOfSoulSounds.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
 {
     public class EFMessagesRepository : IMessageRepository
@@ -14,6 +17,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         private readonly EFAppDbContext context;
         public EFMessagesRepository(EFAppDbContext context) => this.context = context;
         public IQueryable<Message> Items => context.Messages;
+        public IQueryable<IdentityUser> users => context.Users;
 
         public void DeleteItem(Guid id)
         {
@@ -26,10 +30,9 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
             context.Messages.Remove(new Message() {UserId = id });
             context.SaveChanges();
         }
-
         public Message GetItemById(Guid id)
         {
-            return context.Messages.FirstOrDefault(x => x.Id == id);
+            return context.Messages.Include(x=>x.User==users).FirstOrDefault(x => x.Id == id);
         }
 
        

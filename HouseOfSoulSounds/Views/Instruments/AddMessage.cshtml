@@ -1,0 +1,58 @@
+﻿@model Message
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-controller="Instruments" asp-action="AddMessage" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="UserId" value="@Model.UserId"/>
+    <div class="div-box">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" />
+        <span class="warning-text" asp-validation-for="Id"></span>
+    </div>
+    <div class="div-box">
+        <label asp-for="User"></label>
+        <input asp-for="User" />
+        <span class="warning-text" asp-validation-for="User"></span>
+    </div>
+    <div class="div-box">
+        <label asp-for="UserId"></label>
+        <input asp-for="UserId" />
+        <span class="warning-text" asp-validation-for="UserId"></span>
+    </div>
+    <div class="div-box">
+        <label asp-for="Text"></label>
+        <input id="message" asp-for="Text" />
+        <span class="warning-text" asp-validation-for="Text"></span>
+    </div>
+    <div class="div-box">
+        <label asp-for="DateAdded"></label>
+        <input asp-for="DateAdded" />
+        <span class="warning-text" asp-validation-for="DateAdded"></span>
+    </div>
+    <input type="button" id="sendBtn" value="Отправить" />
+</form>
+<div id="chatroom"></div>
+<script src="js/signalr/dist/browser/signalr.min.js"></script>
+<script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/ChatHub")
+            .build();
+
+        hubConnection.on("Send", function (data) {
+
+            let elem = document.createElement("p");
+            elem.appendChild(document.createTextNode(data));
+            let firstElem = document.getElementById("chatroom").firstChild;
+            document.getElementById("chatroom").insertBefore(elem, firstElem);
+
+        });
+
+        document.getElementById("sendBtn").addEventListener("click", function (e) {
+            let message = document.getElementById("message").value;
+            hubConnection.invoke("Send", message);
+        });
+
+        hubConnection.start();
+</script>

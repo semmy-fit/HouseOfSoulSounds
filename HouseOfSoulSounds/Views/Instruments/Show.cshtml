@@ -1,6 +1,6 @@
 ﻿@model InstrumentItem
 @*
-    
+
 *@
 @{
 }
@@ -17,6 +17,7 @@
     <p>
         @Model.Subtitle
     </p>
+
     @if (!string.IsNullOrWhiteSpace(Model.TitleImagePath))
     {
         <div>
@@ -25,5 +26,45 @@
     }
 </div>
 <div>
-    @Html.Raw(Model.Text)
-</div>
+    <h2>Chat приветствует Вас, <label id="userInput">@Model.Chat.UserName</label>!</h2>
+    <div>
+        <input id="UserName" type="hidden" asp-for="@Model.Chat.UserName" />
+        <input id="UpTo" type="hidden" asp-for="@Model.Chat.UpTo" />
+        <input id="InstrumentItemId" type="hidden" asp-for="@Model.Id" />
+        <input id="IsBlocked" type="hidden" asp-for="@Model.Chat.IsBlocked" />
+        <input type="hidden" asp-for="@Model.Chat.Email" />
+    </div>
+
+    <div>Сообщение</div>
+    <div><input type="text" id="messageInput" /></div>
+    <div>
+        <input type="hidden" id="sendButton" value="Послать всем" />
+        <div>
+
+            <div>
+
+                <input type="submit" id="sendPrivateButton" value="Послать" />
+                <label id="labelBlocked"  =" ban" />
+
+            </div>
+        </div>
+        <div>
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+    @if (Model.Chat.IsModerator)
+    {
+<div>
+    <input type="button" id="blockButton" value="Блокировать" />
+    <p>
+        на:&nbsp;
+      
+    </p>
+</div>}
+    <div style=" margin-left:700px; margin-bottom:1000px; text-align:right">
+        @Html.Raw(Model.Text)
+    </div>
+
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/chat.js"></script>

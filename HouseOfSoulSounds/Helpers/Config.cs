@@ -9,6 +9,7 @@ namespace HouseOfSoulSounds.Helpers
         public const string Email = "houseofsoulsounds@gmail.com";
 
         public static readonly string
+            Chat = "Chat",
             Admin = "admin",
             RoleModerator = "chatmoderator",
             RoleAdmin = Admin,

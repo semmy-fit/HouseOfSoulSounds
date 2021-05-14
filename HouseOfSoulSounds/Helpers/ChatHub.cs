@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using HouseOfSoulSounds.Models.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using HouseOfSoulSounds.Models.Domain.Entities;
 
 namespace HouseOfSoulSounds.Helpers
 {
@@ -13,47 +14,62 @@ namespace HouseOfSoulSounds.Helpers
     public class ChatHub:Hub
     {
         private const string prefix = "ИНФО: ";
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<User> userManager;
         private readonly DataManager dataManager;
+        private readonly EFAppDbContext context;
 
         private readonly ConnectionDictionary<string> connections;
 
         public ChatHub(
-            UserManager<IdentityUser> userManager,
+            UserManager<User> userManager,
             DataManager dataManager,
-            ConnectionDictionary<string> connections)
+            ConnectionDictionary<string> connections,
+            EFAppDbContext _context)
         {
             this.userManager = userManager;
             this.dataManager = dataManager;
             this.connections = connections;
+            this.context = _context;
         }
 
-        public async Task SendMessage(string message, string recipient)
+        public async Task SendMessage(string message,string recipient)
         {
+            if(string.IsNullOrEmpty(message))
+            {
+                return;
+            }
             var user = Context.User.Identity.Name;
+            //User user1 = new User();
+            //  var id = userManager.FindByIdAsync(user);
+
             if (recipient == default)
             {
+
                 await Clients.All.SendAsync("ReceiveMessage",
-                    $"{user}: " + message);
-                //ЗДЕСЬ МОЖНО ПОПИЛИТЬ СОХРАНЕНИЕ СООБЩЕНИЙ
+                    $"{user}: " + message, recipient);
+
+                var user1 = await userManager.FindByNameAsync(user);
+                var mess = new Message { Text = message, UserId = user1.Id, User = user1, InstrumentItemId = new Guid(recipient), DateAdded = DateTime.Now };
+
+                //var d = new Message { UserId=id.ToString(),User=user1,InstrumentItemId=instrument.Id,InstrumentItem=instrument,DateAdded=DateTime.Now,Text = message };
+                // dataManager.Messages.SaveItem(mess);
+                if (mess is not null)
+                {
+                    dataManager.Messages.SaveItem(mess);
+                    //context.Messages.Add(mess);
+                    //context.SaveChanges();
+                }
             }
             else
             {
-                var recipientUser = await userManager.FindByNameAsync(recipient);
-                if (recipientUser is null)
-                {
-                    await Clients.Clients(connections.GetConnections(user).ToList())
-                        .SendAsync("ReceiveMessage",
-                        $"(приватно){prefix}участник \"{recipient}\" не найден");
-                    return;
-                }
+                await Clients.All.SendAsync("ReceiveMessage",
+                    $"{user}: " + message, recipient);
+                var user1 = await userManager.FindByNameAsync(user);
+                var mess = new Message { Text = message, UserId = user1.Id, User = user1, InstrumentItemId = new Guid(recipient), DateAdded = DateTime.Now };
 
-                await Clients.Clients(connections.GetConnections(user).ToList())
-                    .SendAsync("ReceiveMessage",
-                        $"(приватно для {recipient}): " + message);
-                await Clients.Clients(connections.GetConnections(recipient).ToList())
-                    .SendAsync("ReceiveMessage",
-                    $"(приватно от {user}): " + message);
+                dataManager.Messages.SaveItem(mess);
+                var recipientUser = await userManager.FindByNameAsync(recipient);
+               
             }
         }
 

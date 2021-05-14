@@ -13,7 +13,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
 
         public IQueryable<TextField> Items => context.TextFields;
 
-        public TextField GetItemById(Guid id) => context.TextFields.FirstOrDefault(x => x.Id == id);
+        public TextField GetItemById(Guid id) => context.TextFields.Include(x=>x.Title).FirstOrDefault(x => x.Id == id);
 
         public TextField GetItemByCodeWord(string codeWord) => context.TextFields.FirstOrDefault(x => x.CodeWord == codeWord);
 

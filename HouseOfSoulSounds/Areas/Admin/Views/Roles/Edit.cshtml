@@ -10,20 +10,20 @@
         {
             <div class="warning-text" asp-validation-summary="All"></div>
         }
-        <input type="hidden" name="userId" value="@Model.Id" />Админ-права:
+        <input type="hidden" name="userId" value="@Model.Id" />Права администратора:
         <div>
             <input type="checkbox" name="roles" value=@RoleAdmin @(Model.UserRoles.Contains(RoleAdmin) ? "checked=\"checked\"" : "") />администратор
             <br />
             –––––––––––––––––––––
             <br />
-            Чат*:
+            Права модератора:
             <br />
             <input type="checkbox" id="@RoleModerator" onclick="onBox(@RoleModerator)" name="roles" value=@RoleModerator @(Model.UserRoles.Contains(RoleModerator) ? "checked=\"checked\"" : "") />модератор
             <br />
     
         </div>
         –––––––––––––––––––––
-        <p>*) Иерархия зависимостей прав доступа в чате: "участник" и "модератор" не могут быть не "гостем".</p>
+        <p></p>
         <button type="submit">Изменить</button>
     </form>
 </div>

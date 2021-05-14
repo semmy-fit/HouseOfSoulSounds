@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,9 +22,9 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         [ForeignKey("CatalogId")]
         public Catalog Catalog { get; set; }
 
-        public IList<Message> Messages { get; set; }
-
-       
+        public  IList<Message> Messages { get; set; } = new List<Message>();
+        [NotMapped]
+        public ChatModel Chat { get; set; }
     }
 
 }

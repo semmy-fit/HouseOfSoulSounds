@@ -8,7 +8,7 @@ namespace HouseOfSoulSounds.Models.Domain
     {
         public ITextFieldsRepository TextFields { get; set; }
         public ICatalogsRepository Catalogs { get; set; }
-        public IMessageRepository Message { get; set; }
+        public IMessageRepository Messages { get; set; }
         public IInstrumentsItemsRepository Instruments { get; set; }
         public IPageRepository Pages { get; set; }
 
@@ -23,7 +23,7 @@ namespace HouseOfSoulSounds.Models.Domain
         {
             TextFields = textFieldsRepository;
             Catalogs = catalogsRepository;
-            Message = messageRepository;
+            Messages = messageRepository;
             Instruments = instrumentsItemsRepository;
             Pages = pageItemsBaseRepository;
 
