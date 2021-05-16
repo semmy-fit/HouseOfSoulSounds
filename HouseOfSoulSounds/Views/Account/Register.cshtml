@@ -1,10 +1,11 @@
 ﻿@model RegisterModel
 @{
     ViewBag.Title = "Регистрация";
+    Layout = "_BaseStyle";
 }
-<div>
+<div style="margin-top:100px;">
     <h2>Регистрация нового пользователя</h2>
-    <div class="div-box">
+    <div class="div-box" style="margin-left:40px">
         <form asp-controller="Account" asp-action="Register" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="ImagePath" />
             @if (!ViewData.ModelState.IsValid)

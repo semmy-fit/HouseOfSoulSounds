@@ -26,7 +26,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
             context.Pages.Remove(new NewPage() { Id = id });
             context.SaveChanges();
         }
-        public NewPage GetItemById(Guid id) => context.Pages.Include(x=>x.PageTitle).FirstOrDefault(x => x.Id == id);
+        public  NewPage GetItemById(Guid id) => context.Pages.Include(x=>x.PageTitle).FirstOrDefault(x => x.Id == id);
         public IQueryable<NewPage> GetPages(Guid id)
         {
 

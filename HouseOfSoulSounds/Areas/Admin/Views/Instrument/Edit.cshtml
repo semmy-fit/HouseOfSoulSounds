@@ -1,14 +1,18 @@
-﻿@model InstrumentItem
+﻿@{ 
+    Layout = "_BaseStyle";
+}
+@model InstrumentItem
 @{ string strTitle = Model.Id == default
                     ? "Добавить новый инструмент"
                     : "Редактировать инструмент";
                 ViewBag.Title = strTitle; }
 
 <script src="~/js/ckeditor/ckeditor.js"></script>
-
+<br />
+<br />
 <div>
     <h2>@strTitle</h2>
-    <div>
+    <div style="margin-left:40px;">
         <form asp-area="Admin" asp-controller="Instrument" asp-action="NewInstrument" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="TitleImagePath" />

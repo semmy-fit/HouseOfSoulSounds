@@ -17,7 +17,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         private readonly EFAppDbContext context;
         public EFMessagesRepository(EFAppDbContext context) => this.context = context;
         public IQueryable<Message> Items => context.Messages;
-        public IQueryable<IdentityUser> users => context.Users;
+        public IQueryable<User> users => context.Users;
 
         public void DeleteItem(Guid id)
         {
@@ -32,7 +32,7 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         }
         public Message GetItemById(Guid id)
         {
-            return context.Messages.Include(x=>x.User==users).FirstOrDefault(x => x.Id == id);
+            return context.Messages.Include(x=>x.User).FirstOrDefault(x => x.Id == id);
         }
 
        

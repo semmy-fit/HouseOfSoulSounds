@@ -10,7 +10,7 @@ namespace HouseOfSoulSounds.Controllers
     {
         public IActionResult Index()
         {
-            return View("Carts");
+            return View();
         }
     }
 }

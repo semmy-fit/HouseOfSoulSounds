@@ -40,41 +40,68 @@ namespace HouseOfSoulSounds.Controllers
                 model.Chat.IsBlocked=user.Blocked??true;
                 model.Chat.IsModerator = User.IsInRole(Config.RoleModer);
                 model.Chat.Email = user.Email;
-                
+                foreach (var item in model.Messages)
+                    item.User = await _userManager.FindByIdAsync(item.UserId);
+
                 return View("Show", model);
             }
 
+        
+
             return View();
         }
-        public IActionResult AddMessage()
-        {
+        //public IActionResult AddMessage()
+        //{
    
-            //if (message1 is not null)
-            //{
-            //    foreach (var item in message1)
-            //    {
-            //        item.User.ToString();
-            //        item.Text.ToString();
-            //        item.DateAdded.ToString();
-            //    }
-            //}
-            //var data = new Message { 
-            //Text=message.Text,
-            //User=message.User,
-            //UserId=message.UserId,
-            //DateAdded=message.DateAdded
-            //};
-            //Message data = new Message();
-            //IQueryable<Message> message1 = from m in _dataManager.Messages.Items
-            //                               select new Message { Id=id,UserId = user.Id, Text =data.Text, User =data.User};
-            ////  data.User= (User)user;
-            //data.Id = message1.Select(x => x.Id).FirstOrDefault();
-            //data.User = message1.Select(x => x.User).FirstOrDefault();
-            //data.UserId = message1.Select(x => x.UserId).FirstOrDefault();
-            //data.Text = message1.Select(x => x.Text).FirstOrDefault();
-            //_dataManager.Messages.SaveItem(data);
-          return  RedirectToAction("Chat","");
+        //    //if (message1 is not null)
+        //    //{
+        //    //    foreach (var item in message1)
+        //    //    {
+        //    //        item.User.ToString();
+        //    //        item.Text.ToString();
+        //    //        item.DateAdded.ToString();
+        //    //    }
+        //    //}
+        //    //var data = new Message { 
+        //    //Text=message.Text,
+        //    //User=message.User,
+        //    //UserId=message.UserId,
+        //    //DateAdded=message.DateAdded
+        //    //};
+        //    //Message data = new Message();
+        //    //IQueryable<Message> message1 = from m in _dataManager.Messages.Items
+        //    //                               select new Message { Id=id,UserId = user.Id, Text =data.Text, User =data.User};
+        //    ////  data.User= (User)user;
+        //    //data.Id = message1.Select(x => x.Id).FirstOrDefault();
+        //    //data.User = message1.Select(x => x.User).FirstOrDefault();
+        //    //data.UserId = message1.Select(x => x.UserId).FirstOrDefault();
+        //    //data.Text = message1.Select(x => x.Text).FirstOrDefault();
+        //    //_dataManager.Messages.SaveItem(data);
+        //  return  RedirectToAction("Chat","");
         
+        //}
+        public async Task<IActionResult> SendBlock(string model)
+        {
+            var user = await _userManager.FindByNameAsync(model);
+            if (user is null)
+            {
+                return null;
+            }
+            var roles = await  _userManager.GetRolesAsync(user);
+
+            if(roles.Contains(Config.Admin) || roles.Contains(Config.RoleModer) )
+            {
+                return null;
+            }
+            //var deletemessages = _dataManager.Messages.Items.Where(x => x.UserId == user.Id);
+          
+                _dataManager.Messages.DeleteMessagesByUserId(user.Id);
+            user.Blocked = true;
+            await _userManager.UpdateAsync(user);
+            
+
+            return RedirectToAction("Show","");
+
         }
         public IActionResult Welcome()
         {

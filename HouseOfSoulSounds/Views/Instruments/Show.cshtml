@@ -1,9 +1,5 @@
 ﻿@model InstrumentItem
-@*
 
-*@
-@{
-}
 <div>
     <h2>
         @Model.Title
@@ -26,13 +22,15 @@
     }
 </div>
 <div>
-    <h2>Chat приветствует Вас, <label id="userInput">@Model.Chat.UserName</label>!</h2>
     <div>
         <input id="UserName" type="hidden" asp-for="@Model.Chat.UserName" />
         <input id="UpTo" type="hidden" asp-for="@Model.Chat.UpTo" />
         <input id="InstrumentItemId" type="hidden" asp-for="@Model.Id" />
         <input id="IsBlocked" type="hidden" asp-for="@Model.Chat.IsBlocked" />
         <input type="hidden" asp-for="@Model.Chat.Email" />
+        <div>
+            @Html.Raw(Model.Text)
+        </div>
     </div>
 
     <div>Сообщение</div>
@@ -44,26 +42,47 @@
             <div>
 
                 <input type="submit" id="sendPrivateButton" value="Послать" />
-                <label id="labelBlocked"  =" ban" />
+                @if (User.IsInRole(Config.RoleModer))
+                {
+                <a  asp-action="SendBlock"  asp-controller="Instruments" asp-route-model="@Model.BlockedName" onclick="editLabel()" >
+                    <labelBlocked id="labelBlocked" asp-for="BlockedName"></labelBlocked>
+                    <script >
+                        function editLabel() {
+                        @Model.BlockedName = document.getElementById("labelBlocked").value;
+
+                        }
+                    </script>
+
+                </a>
+                }
+                
 
             </div>
         </div>
         <div>
-            <ul id="messagesList"></ul>
+            <ul id="messagesList">
+                @if (Model.Messages.Any())
+                {
+                @foreach (var item in Model.Messages.OrderBy(x => x.DateAdded))
+                {
+                    <li>
+                        @item.User.UserName + ": " + @item.Text
+                    </li>
+                    }
+                }
+                </ul>
         </div>
     </div>
     @if (Model.Chat.IsModerator)
     {
 <div>
-    <input type="button" id="blockButton" value="Блокировать" />
+
     <p>
         на:&nbsp;
       
     </p>
 </div>}
-    <div style=" margin-left:700px; margin-bottom:1000px; text-align:right">
-        @Html.Raw(Model.Text)
-    </div>
+    
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script>

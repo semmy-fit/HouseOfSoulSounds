@@ -12,5 +12,22 @@ namespace HouseOfSoulSounds.Controllers
         {
             return View();
         }
+
+        public IActionResult Gitars()
+        {
+            return View();
+        }
+        public IActionResult Headphones()
+        {
+            return View();
+        }
+        public IActionResult Violins()
+        {
+            return View();
+        }
+        public IActionResult Microphones()
+        {
+            return View();
+        }
     }
 }

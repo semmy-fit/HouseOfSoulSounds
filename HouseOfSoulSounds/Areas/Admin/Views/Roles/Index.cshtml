@@ -23,6 +23,7 @@
                             new {onclick = $"return confirm('Удаление пользователя не рекомендуется - информация о нём занимает мало места в БД, но блокирует повторное создание. Удалить безвозвратно: \"{user.UserName}\"?')"})
                         |
                         <a asp-area="Admin" asp-controller="Roles" asp-action="Edit" asp-route-id="@user.Id">права</a>
+                        
                     </div>
                 }
             </div>

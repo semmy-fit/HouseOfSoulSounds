@@ -1,9 +1,10 @@
 ﻿@model InfoModel
 @{
     ViewBag.Title = Model.Title;
+    Layout = "_BaseStyle";
 }
 <div>
-    <h2>@ViewBag.Title</h2>
+    <h2 style="margin-top:100px;">@ViewBag.Title</h2>
     <p>
         @Html.Raw(Model.Text)
         На данном сайте вы найдете основные виды музыкальных инструментов и их характеристики. 

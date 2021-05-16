@@ -24,13 +24,19 @@ connection.on("ReceiveMessage", function (message, id) {
     li.onclick = function () { selectReceiver(receiver); };
     
     li.textContent = msg;
+
     document.getElementById("messagesList").appendChild(li);
 });
+
 function selectReceiver(name) {
     let m = document.getElementById("labelBlocked");
-    m.text(name);
+    if (m != null) {
+        m.innerHTML = 'Заблокировать: ' + name;
+        m.value = name;
+        
+    }
     
-    if (true);
+   
     
 };
 

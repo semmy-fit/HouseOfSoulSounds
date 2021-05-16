@@ -1,0 +1,78 @@
+﻿
+@{
+}
+@model IQueryable<InstrumentItem>
+@{
+    string strTitle = "New page";
+    ViewBag.Title = strTitle;
+    Layout = "_BaseStyle";
+}
+<div style="margin-left:300px; margin-right:300px;">
+    
+    @foreach (var item in Model)
+    {
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+                *:before, *:after {
+                    box-sizing: border-box;
+                }
+
+
+
+            .wrap {
+                width: 100%;
+                height: 100%;
+                background: gray;
+                padding: 15px 7.5px;
+                display: inline-block;
+            }
+
+                .wrap div[class^='block-'] {
+                    width: calc(100% / 3);
+                    min-height: 100px;
+                    padding: 10px;
+                    margin: 0 7.5px;
+                    text-align: center;
+                    background: white;
+                }
+
+                    .wrap div[class^='block-'] img {
+                        display: block;
+                        height: auto;
+                        max-width: 100%;
+                        border: 1px solid gray;
+                        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .wrap div[class^='block-'] p.price .price-count {
+                        color: red;
+                    }
+        </style>
+        <input type="hidden" asp-for="@item.TitleImagePath" />
+
+        <div class="wrap">
+            <div class="block-0">
+                <img src="~/images/DB/@item.TitleImagePath" alt="ls-sample1" />
+
+                <h2 class="title"><a asp-area="" asp-action="Index" asp-controller="Instruments" asp-route-id="@item.Id"> @item.Title.ToString()</a></h2>
+                <p class="sub-title">@item.Subtitle</p>
+            </div>
+
+        </div>
+
+
+        @*<p>@item.PageTitle</p>
+            <div>
+                @item.ImagePage
+            </div>
+            <div>
+                @item.BaseText
+            </div>
+            <div>@item.Saidbar_text</div>*@
+    }
+</div>
+
+    

@@ -44,7 +44,9 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
                     UserName = user.UserName,
                     Email = user.Email,
                     UserRoles = userRoles,
-                    AllRoles = allRoles
+                    AllRoles = allRoles,
+                    Blocked = user.Blocked ?? false
+
                 };
                 return View(model);
             }
@@ -61,6 +63,10 @@ namespace HouseOfSoulSounds.Areas.Admin.Controllers
             {
                 var userRoles = await userManager.GetRolesAsync(user);
                 var addRoles = roles.Except(userRoles);
+                var blocked = roles.Contains("Block");
+                await userManager.UpdateAsync(user);
+                user.Blocked = blocked;
+
                 var removeRoles = userRoles.Except(roles);
                 bool add = addRoles.Any();
                 bool remove = removeRoles.Any();

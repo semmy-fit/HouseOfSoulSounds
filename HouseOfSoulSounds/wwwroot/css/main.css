@@ -76,15 +76,16 @@ html, body {
 }
 
 body {
-  background: #111860;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1.8rem;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1.8333;
-  color: rgba(0, 0, 0, 0.8);
-  margin: 0;
-  padding: 0;
+    background: #111860;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.8333;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
 }
 
 /* ------------------------------------------------------------------- 
@@ -3158,7 +3159,9 @@ footer {
   padding-bottom: 10.2rem;
   font-size: 1.5rem;
   line-height: 2;
-  color: rgba(255, 255, 255, 0.5);
+  color: black;
+  background-color:darkblue;
+   
 }
 
 footer a {
@@ -3199,6 +3202,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
 
 .s-footer__main {
   margin-bottom: 3rem;
+  background-color:darkblue;
 }
 
 /* -------------------------------------------------------------------
@@ -3222,7 +3226,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
   background: url(../images/icons/icon-mail.svg) 20px center no-repeat, rgba(0, 0, 0, 0.25);
   background-size: 24px 16px, auto;
   margin-bottom: 1.8rem;
-  color: white;
+  color: darkblue;
   border: none;
 }
 
@@ -3297,6 +3301,7 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
  * ------------------------------------------------------------------- */
 .s-footer__bottom .s-footer__copyright span {
   display: inline-block;
+  background-color:darkblue;
 }
 
 .s-footer__bottom .s-footer__copyright span::after {

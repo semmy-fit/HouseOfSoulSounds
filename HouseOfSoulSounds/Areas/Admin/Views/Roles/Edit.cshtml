@@ -20,6 +20,12 @@
             <br />
             <input type="checkbox" id="@RoleModerator" onclick="onBox(@RoleModerator)" name="roles" value=@RoleModerator @(Model.UserRoles.Contains(RoleModerator) ? "checked=\"checked\"" : "") />модератор
             <br />
+
+     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            <br />
+            <input type="checkbox" name="roles" value="Block" @(Model.Blocked ? "checked=\"checked\"" : "") />блокирован
+            <br />
+
     
         </div>
         –––––––––––––––––––––

@@ -4,11 +4,11 @@
 
     <div class="header__logo">
         <a class="logo" href='@Url.Action("Index", "Home")'>
-            <img src="images/logo.jpg" alt="Homepage">
+            <img src="~/images/logo.jpg" alt="Homepage">
         </a>
     </div> <!-- end header__logo -->
 
-    <a class="header__search-trigger" href="#0"></a>
+    <!--<a class="header__search-trigger" href="#0"></a>
     <div class="header__search">
 
         <form role="search" method="get" class="header__search-form" action="#">
@@ -21,7 +21,7 @@
 
         <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
-    </div>  <!-- end header__search -->
+    </div>-->  <!-- end header__search -->
 
     <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
     <nav class="header__nav-wrap">
@@ -52,20 +52,20 @@
             <li class="has-children">
                 <a href="#0" title="">Categories</a>
                 <ul class="sub-menu">
-                    <li><a href='@Url.Action("About", "Instruments")'>Instruments</a></li>
-                    <li><a href='@Url.Action("Carts", "Carts")'>Carts</a></li>
-                    <li><a href='@Url.Action("Index", "Barabans")'>Barabans</a></li>
+                    <li><a href='@Url.Action("Index", "Carts")'> Гитара Foix FFG-1038BK</a></li>
+                    <li><a href='@Url.Action("Index", "Catalog")'>Инструменты из каталогов</a></li>
                     <li><a href='@Url.Action("Index", "Wind")'>Духовые</a></li>
-                    <li><a href="">Ударные</a></li>
-                    <li><a href="">Струнные</a></li>
+                    
                 </ul>
             </li>
             <li class="has-children">
                 <a href="#0" title="">Blog</a>
                 <ul class="sub-menu">
-                    <li><a href='@Url.Action("Index","Blog")'>Casio циф пиано</a></li>
-                    <li><a href="single-audio.html">Audio Post</a></li>
-                    <li><a href="single-standard.html">Standard Post</a></li>
+                    <li><a href='@Url.Action("Index","Blog")'>Casio цифровые синтезаторы </a></li>
+                    <li><a href='@Url.Action("Gitars","Blog")'>Выбор первой гитары</a></li>
+                    <li><a href='@Url.Action("Headphones","Blog")'>Выбор студийных наушников</a></li>
+                    <li><a href='@Url.Action("Violins","Blog")'>Выбор первой скрипки</a></li>
+                    <li><a href='@Url.Action("Microphones","Blog")'>Выбор студийных микрофонов</a></li>
                 </ul>
             </li>
             @*<li><a href='@Url.Action("Login", "Account")' title="">Вход</a></li>

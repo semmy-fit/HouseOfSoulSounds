@@ -1,4 +1,5 @@
 ﻿
+using HouseOfSoulSounds.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,9 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
         public Catalog Catalog { get; set; }
 
         public  IList<Message> Messages { get; set; } = new List<Message>();
+        public IQueryable<EditCatalogsModel> editCatalogs { get; set; }
+        [NotMapped]
+        public string BlockedName { get; set; }
         [NotMapped]
         public ChatModel Chat { get; set; }
     }
