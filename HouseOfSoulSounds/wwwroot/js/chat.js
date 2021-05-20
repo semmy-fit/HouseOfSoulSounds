@@ -19,20 +19,22 @@ connection.on("ReceiveMessage", function (message, id) {
     
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var li = document.createElement("li");
-    var receiver = message.slice(0, message.indexOf(":"));
     // li.onclick("labelBlocked") = selectReceiver(receiver);
-    li.onclick = function () { selectReceiver(receiver); };
+    li.onclick = function () { selectReceiver(message); };
     
     li.textContent = msg;
 
     document.getElementById("messagesList").appendChild(li);
 });
 
-function selectReceiver(name) {
+function selectReceiver(message) {
     let m = document.getElementById("labelBlocked");
+    var name = message.slice(0, message.indexOf(":"));
     if (m != null) {
         m.innerHTML = 'Заблокировать: ' + name;
-        m.value = name;
+        var serch = document.getElementById("blocked");
+        serch.setAttribute("value", name);
+
         
     }
     

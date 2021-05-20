@@ -25,8 +25,10 @@ namespace HouseOfSoulSounds.Models.Domain.Entities
 
         public  IList<Message> Messages { get; set; } = new List<Message>();
         public IQueryable<EditCatalogsModel> editCatalogs { get; set; }
+        public IQueryable<InstrumentItem> Instruments { get; set; }
         [NotMapped]
         public string BlockedName { get; set; }
+    
         [NotMapped]
         public ChatModel Chat { get; set; }
     }

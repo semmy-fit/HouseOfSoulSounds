@@ -21,12 +21,14 @@
             <input type="checkbox" id="@RoleModerator" onclick="onBox(@RoleModerator)" name="roles" value=@RoleModerator @(Model.UserRoles.Contains(RoleModerator) ? "checked=\"checked\"" : "") />модератор
             <br />
 
-     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             <br />
-            <input type="checkbox" name="roles" value="Block" @(Model.Blocked ? "checked=\"checked\"" : "") />блокирован
+            Разблокировать(блокировать) пользователя:
+            <br />
+            <br />
+            <input type="checkbox" id="@Blocked"  onclick="onBox(@Blocked)" name="roles" value="@Blocked" @(Model.Blocked ? "checked=\"checked\"" : "") />блокирован
             <br />
 
-    
+
         </div>
         –––––––––––––––––––––
         <p></p>
@@ -37,13 +39,19 @@
     function onBox(box) {
         var box1 = document.getElementById("@RoleAdmin");
         var box3 = document.getElementById("@RoleModerator");
+        var box4 = document.getElementById("@Blocked");
+        
         switch (box) {
             case @RoleAdmin:
                 if (!box1.checked) box2.checked = box3.checked = false;
                 break;
          
             case @RoleModerator:
-                if (box3.checked) box1.checked = true;
+                if (box3.checked) {
+                    box1.checked = true;
+                    box4.checked = false;
+                }
+
                 break;
         }
     }

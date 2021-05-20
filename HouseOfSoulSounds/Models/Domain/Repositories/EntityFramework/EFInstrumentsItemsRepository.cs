@@ -12,8 +12,17 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
         public EFInstrumentsItemsRepository(EFAppDbContext context) => this.context = context;
         public IQueryable<InstrumentItem> Items => context.InstrumentItems;
 
-        public InstrumentItem GetItemById(Guid id) => context.InstrumentItems.Include(i=>i.Messages).FirstOrDefault(x => x.Id == id);
-      
+        public InstrumentItem GetItemById(Guid id)
+        {
+            var messages = context.Messages.Where(x => x.InstrumentItemId == id).ToList();
+            var inst = context.InstrumentItems.ToList();
+            //var res = context.InstrumentItems.FirstOrDefault(x => x.Id == id);  
+            var res = inst.FirstOrDefault(x => x.Id == id);  
+            if (res is null) return null;
+            if (messages.Any()) res.Messages = messages.ToList();
+            return res;
+           // context.InstrumentItems.Include(i => i.Messages).FirstOrDefault(x => x.Id == id);
+        }
         public IQueryable<InstrumentItem> GetInstrumentInCatalog(Guid id)
         {
             var item = context.InstrumentItems;

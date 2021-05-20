@@ -37,7 +37,7 @@ namespace HouseOfSoulSounds.Controllers
                 model.Chat = new ChatModel();
                 model.Chat.UserName = User.Identity.Name;
                 model.Chat.UpTo = DateTime.Now;
-                model.Chat.IsBlocked=user.Blocked??true;
+                model.Chat.IsBlocked=user.Blocked??false;
                 model.Chat.IsModerator = User.IsInRole(Config.RoleModer);
                 model.Chat.Email = user.Email;
                 foreach (var item in model.Messages)
@@ -80,14 +80,15 @@ namespace HouseOfSoulSounds.Controllers
         //  return  RedirectToAction("Chat","");
         
         //}
-        public async Task<IActionResult> SendBlock(string model)
+        [HttpGet]
+        public async Task<IActionResult> SendBlock(string user)
         {
-            var user = await _userManager.FindByNameAsync(model);
-            if (user is null)
+            var buser = await _userManager.FindByNameAsync(user);
+            if (buser is null)
             {
                 return null;
             }
-            var roles = await  _userManager.GetRolesAsync(user);
+            var roles = await  _userManager.GetRolesAsync(buser);
 
             if(roles.Contains(Config.Admin) || roles.Contains(Config.RoleModer) )
             {
@@ -95,9 +96,9 @@ namespace HouseOfSoulSounds.Controllers
             }
             //var deletemessages = _dataManager.Messages.Items.Where(x => x.UserId == user.Id);
           
-                _dataManager.Messages.DeleteMessagesByUserId(user.Id);
-            user.Blocked = true;
-            await _userManager.UpdateAsync(user);
+                _dataManager.Messages.DeleteMessagesByUserId(buser.Id);
+            buser.Blocked = true;
+            await _userManager.UpdateAsync(buser);
             
 
             return RedirectToAction("Show","");

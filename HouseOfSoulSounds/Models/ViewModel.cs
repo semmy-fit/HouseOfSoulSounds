@@ -1,4 +1,5 @@
-﻿using HouseOfSoulSounds.Models.Domain;
+﻿using HouseOfSoulSounds.Models;
+using HouseOfSoulSounds.Models.Domain;
 using HouseOfSoulSounds.Models.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace HouseOfSoulSounds.Areas.Admin.Models
+namespace HouseOfSoulSounds.Models
 {
     public class ViewModel
     {

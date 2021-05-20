@@ -17,7 +17,9 @@ namespace HouseOfSoulSounds.Helpers
             DefaultAvatar = "\\images\\avatars\\0.png",
             AvatarsPath = "\\images\\avatars\\",
             TitleInstrumentPath = "\\images\\DB\\",
-            ImagePagePath = "\\images\\Page\\";
+            ImagePagePath = "\\images\\Page\\",
+            Blocked = "Bloked";
+
 
         public static string ConnectionString { get; set; }
         public static string ConnectionDictionary { get; set; }

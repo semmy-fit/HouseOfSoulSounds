@@ -14,6 +14,7 @@ using HouseOfSoulSounds.Helpers;
 using HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using HouseOfSoulSounds.Models;
 
 namespace HouseOfSoulSounds.Areas.Admin.Controllers
 {

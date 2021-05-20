@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseOfSoulSounds.Migrations
 {
     [DbContext(typeof(EFAppDbContext))]
-    [Migration("20210410085020_InitialCreate")]
+    [Migration("20210520092522_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,44 @@ namespace HouseOfSoulSounds.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("EditCatalogsModelInstrumentItem", b =>
+                {
+                    b.Property<Guid>("InstrumentItemsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("editCatalogsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("InstrumentItemsId", "editCatalogsId");
+
+                    b.HasIndex("editCatalogsId");
+
+                    b.ToTable("EditCatalogsModelInstrumentItem");
+                });
+
+            modelBuilder.Entity("HouseOfSoulSounds.Areas.Admin.Models.NewPage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BaseText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Saidbar_text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pages");
+                });
 
             modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.Catalog", b =>
                 {
@@ -46,6 +84,9 @@ namespace HouseOfSoulSounds.Migrations
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("InstrumentItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MetaDescription")
                         .HasMaxLength(256)
@@ -77,6 +118,8 @@ namespace HouseOfSoulSounds.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CatalogId");
+
+                    b.HasIndex("InstrumentItemId");
 
                     b.ToTable("InstrumentItems");
                 });
@@ -158,7 +201,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("a543bcfd-b9ee-4584-a729-54d639a29535"),
                             CodeWord = "HomePage",
-                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Главная"
                         },
@@ -166,7 +209,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("1cbfb4cb-d7c9-4c36-8187-d1a411c643b7"),
                             CodeWord = "InstrumentsPage",
-                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Каталоги"
                         },
@@ -174,7 +217,7 @@ namespace HouseOfSoulSounds.Migrations
                         {
                             Id = new Guid("7698042d-a1db-4190-bb09-cc8954954ced"),
                             CodeWord = "ContactsPage",
-                            DateAdded = new DateTime(2021, 4, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateAdded = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Utc),
                             Text = "Содержание заполняется администратором",
                             Title = "Контакты"
                         });
@@ -256,19 +299,34 @@ namespace HouseOfSoulSounds.Migrations
                             Id = "A8B0919E-FA64-4F08-89C5-A37B5F003C00",
                             AccessFailedCount = 0,
                             Blocked = false,
-                            ConcurrencyStamp = "bcd52b7d-fcca-4a22-97c6-4e8ea37a9277",
+                            ConcurrencyStamp = "81b7a3ae-07c7-4eb4-ab09-5f95437b3f8f",
                             Email = "admin@email.com",
                             EmailConfirmed = true,
                             ImagePath = "\\images\\avatars\\0.png",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EMAIL.COM",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENM/OfnBX8sIxcowjGoAx41KHYK3xo2YbRCRyXo7aRcHVhmVW/86fYz7Pg0+h6G8gw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEPUXzLkO9y8NOX+bceBIfJ6NTc4h3dtT4Rk+9c3RYysn3yi0/HAPz8WnGrosd+KVQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
+                });
+
+            modelBuilder.Entity("HouseOfSoulSounds.Models.EditCatalogsModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EditCatalogsModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -301,14 +359,14 @@ namespace HouseOfSoulSounds.Migrations
                         new
                         {
                             Id = "C3BD297D-2AEC-4582-B679-FDA3AA5164D3",
-                            ConcurrencyStamp = "aea14bad-a7ce-4cbc-b615-015f4c02303f",
+                            ConcurrencyStamp = "441414e5-2c05-42b5-b1e3-277e4e8c2783",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "DB25A8AF-4316-4FF6-BCB3-3A6CCE7CFE53",
-                            ConcurrencyStamp = "2456bdaa-0034-4beb-808a-849ac2a712c1",
+                            ConcurrencyStamp = "ae9defe8-f5ac-4f63-9e62-60a9543c8002",
                             Name = "chatmoderator",
                             NormalizedName = "CHATMODERATOR"
                         });
@@ -430,6 +488,21 @@ namespace HouseOfSoulSounds.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("EditCatalogsModelInstrumentItem", b =>
+                {
+                    b.HasOne("HouseOfSoulSounds.Models.Domain.Entities.InstrumentItem", null)
+                        .WithMany()
+                        .HasForeignKey("InstrumentItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HouseOfSoulSounds.Models.EditCatalogsModel", null)
+                        .WithMany()
+                        .HasForeignKey("editCatalogsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.InstrumentItem", b =>
                 {
                     b.HasOne("HouseOfSoulSounds.Models.Domain.Entities.Catalog", "Catalog")
@@ -438,13 +511,17 @@ namespace HouseOfSoulSounds.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HouseOfSoulSounds.Models.Domain.Entities.InstrumentItem", null)
+                        .WithMany("Instruments")
+                        .HasForeignKey("InstrumentItemId");
+
                     b.Navigation("Catalog");
                 });
 
             modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.Message", b =>
                 {
                     b.HasOne("HouseOfSoulSounds.Models.Domain.Entities.InstrumentItem", "InstrumentItem")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("InstrumentItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -509,6 +586,13 @@ namespace HouseOfSoulSounds.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HouseOfSoulSounds.Models.Domain.Entities.InstrumentItem", b =>
+                {
+                    b.Navigation("Instruments");
+
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

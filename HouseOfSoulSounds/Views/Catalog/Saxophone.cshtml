@@ -8,7 +8,7 @@
     Layout = "_BaseStyle";
 }
 <div style="margin-left:300px; margin-right:300px;">
-    @foreach (var f in Model.editCatalogs.Where(x => x.Title == "Барабаны"))
+    @foreach (var f in Model.editCatalogs.Where(x => x.Title == "Саксофоны"))
     {
         <input type="hidden" name="Id" value="@f.Id" />
         <input type="hidden" name="Title" value="@f.Title" />
@@ -24,9 +24,8 @@
                         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
                         transition: 0.3s;
                         width: 40%;
-                        margin-left:400px;
                         border-radius: 5px;
-                     
+               
                     }
 
                         .card:hover {
@@ -65,4 +64,4 @@
 </div>
 
 
-    
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HouseOfSoulSounds.Models.Domain;
 using HouseOfSoulSounds.Models.Domain.Entities;
 
-namespace HouseOfSoulSounds.Areas.Admin.Models
+namespace HouseOfSoulSounds.Models
 {
     public class EditCatalogsModel
     {

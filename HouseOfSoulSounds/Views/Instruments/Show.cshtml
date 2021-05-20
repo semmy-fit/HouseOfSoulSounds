@@ -40,24 +40,23 @@
         <div>
 
             <div>
-
-                <input type="submit" id="sendPrivateButton" value="Послать" />
-                @if (User.IsInRole(Config.RoleModer))
+                @if (!Model.Chat.IsBlocked)
                 {
-                <a  asp-action="SendBlock"  asp-controller="Instruments" asp-route-model="@Model.BlockedName" onclick="editLabel()" >
-                    <labelBlocked id="labelBlocked" asp-for="BlockedName"></labelBlocked>
-                    <script >
-                        function editLabel() {
-                        @Model.BlockedName = document.getElementById("labelBlocked").value;
+                    <input type="submit" id="sendPrivateButton" value="Послать" />
+                    @if (User.IsInRole(Config.RoleModer))
+                    {
+                        <labelBlocked id="labelBlocked"></labelBlocked>
+                        <form method="get" action="~/Instruments/SendBlock">
 
-                        }
-                    </script>
+                            <input id="blocked" name="user" type="hidden">
+                            <input type="submit" value="Блокировать" />
 
-                </a>
+                        </form>
+                    }
+
                 }
-                
-
             </div>
+                
         </div>
         <div>
             <ul id="messagesList">
@@ -65,7 +64,7 @@
                 {
                 @foreach (var item in Model.Messages.OrderBy(x => x.DateAdded))
                 {
-                    <li>
+                    <li onclick="selectReceiver">
                         @item.User.UserName + ": " + @item.Text
                     </li>
                     }

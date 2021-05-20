@@ -27,7 +27,8 @@ namespace HouseOfSoulSounds.Models.Domain.Repositories.EntityFramework
 
         public void DeleteMessagesByUserId(string id)
         {
-            context.Messages.Remove(new Message() {UserId = id });
+            foreach (var item in context.Messages.Where(y => y.UserId == id))
+                context.Remove(item);
             context.SaveChanges();
         }
         public Message GetItemById(Guid id)
